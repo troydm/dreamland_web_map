@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import AreaMap from './Map';
 import reportWebVitals from './reportWebVitals';
 
