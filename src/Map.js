@@ -91,10 +91,6 @@ class GridBase {
         return pos;
     }
 
-    posWithin(pos) {
-        return (0 <= pos[0] && pos[0] < this.map.length) && (0 <= pos[1] && pos[1] < this.map[pos[0]].length);
-    }
-
     hasNode(id) {
         return this.placed.has(id);
     }
@@ -108,8 +104,12 @@ class GridBase {
     }
 
     forEach(fun) {
+        this.forEachRow(y => this.forEachOnRow(y, fun))
+    }
+
+    forEachRow(fun) {
         for (let y = 0; y < this.map.length; y++) {
-            this.forEachOnRow(y,fun);
+            fun(y, this.map[y])
         }
     }
 
@@ -120,15 +120,193 @@ class GridBase {
             }
         }
     }
+
+    copy(grid) {
+        this.map = new Array(grid.map.length)
+        for (let i = 0; i < this.map.length; i++) {
+            this.map[i] = [...grid.map[i]];
+        }
+        this.placed.clear()
+        this.forEach(i => this.placed.add(i))
+    }
+
+    insertHRow(y) {
+        this.map.splice(y, 0, new Array(this.width()).fill(null));
+    }
+
+    insertVRow(x) {
+        this.forEachRow((y,row) => row.splice(x, 0, null))
+    }
+
+    get(p) {
+        return this.map[p[0]][p[1]]
+    }
+
+    isWithinY(p) {
+        return 0 <= p[0] && p[0] < this.map.length
+    }
+
+    isWithinX(p) {
+        return 0 <= p[1] && this.map[p[0]] && p[1] < this.map[p[0]].length
+    }
+
+    isWithin(p) {
+        return this.isWithinY(p) && this.isWithinX(p)
+    }
+
+    set(p, v) {
+        if (this.map[p[0]][p[1]]) {
+            this.placed.delete(this.map[p[0]][p[1]])
+        }
+        this.map[p[0]][p[1]] = v
+        this.placed.add(v)
+    }
+
+    up(p) {
+        return [p[0]-1,p[1]]
+    }
+
+    down(p) {
+        return [p[0]+1,p[1]]
+    }
+
+    right(p) {
+        return [p[0],p[1]+1]
+    }
+
+    left(p) {
+        return [p[0],p[1]-1]
+    }
 }
 
 class SectionGrid extends GridBase {
-    constructor(sections) {
+    constructor(id, hint){
         super();
+        this.id = id;
+        this.hint = hint;
+    }
+
+    gridXY(nodeWidth, nodeHeight) {
+        const coord = new Map();
+        this.forEach((id, y, x) => coord.set(id, [y*nodeHeight,x*nodeWidth]));
+        return coord;
+    }
+
+    isLadder(from, to, dir) {
+        return dir.includes('ladder')
+    }
+
+    isNorth(from, to, dir) {
+        return dir === 'north' || dir === 'up'
+    }
+
+    isSouth(from, to, dir) {
+        return dir === 'south' || dir === 'down'
+    }
+
+    isEast(from, to, dir) {
+        return dir === 'east'
+    }
+
+    isWest(from, to, dir) {
+        return dir === 'west'
+    }
+
+    isAnyDirection(from, to, dir) {
+        return dir === '*'
+    }
+
+    insertRoom(from, to, pos, dir) {
+        this.hint.fixDirection && this.hint.fixDirection
+            .forEach(f => {
+                if (f.from === from && f.to === to) {
+                    dir = f.dir;
+                }
+            });
+        console.log('Inserting room ' + from + ' -> ' + to + ' ' + pos + ' ' + dir)
+        let tpos
+        if (dir) {
+            if (this.isLadder(from, to, dir)) {
+                dir = 'up';
+                // if ladder is not going up then it's going down
+                if (this.get(this.up(pos))) {
+                    dir = 'down';
+                }
+            }
+            if (this.isNorth(from, to, dir)) {
+                const ipos = this.up(pos)
+                tpos = [ipos, this.left(ipos), this.right(ipos)]
+            } else if (this.isSouth(from, to, dir)) {
+                const ipos = this.down(pos)
+                tpos = [ipos, this.left(ipos), this.right(ipos)]
+            } else if (this.isEast(from, to, dir)) {
+                const ipos = this.right(pos)
+                tpos = [ipos, this.up(ipos), this.down(ipos)]
+            } else if (this.isWest(from, to, dir)) {
+                const ipos = this.left(pos)
+                tpos = [ipos, this.up(ipos), this.down(ipos)]
+            } else if (this.isAnyDirection(from, to, dir)) {
+                tpos = [this.up(pos), this.down(pos), this.left(pos), this.right(pos)]
+            } else {
+                console.log('Error, unknown direction, couldnt place room: ' + from + ' -> ' + to + ' ' + dir)
+                return;
+            }
+        } else {
+            tpos = [pos]
+        }
+        // console.log(tpos)
+        for (let i = 0; i < tpos.length; i++) {
+            const ipos = tpos[i]
+            if (this.isWithin(ipos)) {
+                if (this.get(ipos) === null) {
+                    this.set(ipos,to)
+                    return;
+                }
+            } else {
+                // console.log(ipos);
+                if (this.isWithinX(ipos)) {
+                    // console.log('inserting hrow')
+                    if (ipos[0] === -1) {
+                        ipos[0] = 0
+                    }
+                    this.insertHRow(ipos[0])
+                    this.set(ipos,to)
+                } else if (this.isWithinY(ipos)) {
+                    // console.log('inserting vrow')
+                    if (ipos[1] === -1) {
+                        ipos[1] = 0
+                    }
+                    this.insertVRow(ipos[1])
+                    this.set(ipos,to)
+                } else {
+                    // console.log('inserting both rows')
+                    if (ipos[0] === -1) {
+                        ipos[0] = 0
+                    }
+                    this.insertHRow(ipos[0])
+                    if (!this.isWithinX(ipos)) {
+                        if (ipos[1] === -1) {
+                            ipos[1] = 0
+                        }
+                        this.insertVRow(ipos[1])
+                    }
+                    this.set(ipos,to)
+                }
+                return;
+            }
+        }
+        console.log('Error, couldnt place room: ' + from + ' -> ' + to + ' ' + dir)
+    }
+
+}
+
+class MapGrid extends SectionGrid {
+    constructor(sections,hint) {
+        super(0, hint);
         this.sections = sections;
         this.spaceX = 0;
         this.spaceY = 0;
-        this.initSectionGrid();
+        this.initMapGrid();
     }
 
     findSection(id) {
@@ -148,7 +326,7 @@ class SectionGrid extends GridBase {
         });
         const maxw = Math.max(...wh.map(s => s[1]));
         let yp = 0;
-        this.print();
+        // this.print();
         // console.log(wh);
         rows.forEach(y => {
             const nodes = this.nodesInRow(y);
@@ -176,7 +354,7 @@ class SectionGrid extends GridBase {
         console.log(this.sections);
     }
 
-    initSectionGrid() {
+    initMapGrid() {
         this.sections.forEach(s => {
             let pos = this.findPos(s.id) || [0, 0];
             // console.log(s.id);
@@ -234,123 +412,13 @@ class SectionGrid extends GridBase {
         }
         this.placed.add(id);
         // console.log(this.map);
-        this.print();
-    }
-}
-
-class Grid extends GridBase {
-    constructor(id){
-        super();
-        this.id = id;
-    }
-
-    gridXY(nodeWidth, nodeHeight) {
-        const coord = new Map();
-        this.forEach((id, y, x) => coord.set(id, [y*nodeHeight,x*nodeWidth]));
-        return coord;
-    }
-
-    hasRoom(id) {
-        return this.hasNode(id);
-    }
-
-    insertRoomByDirection(from, to, pos, dir) {
-        let epos = [pos[0], pos[1]];
-        // console.log(from + ' -> ' + to + ' ' + pos + ' ' + dir);
-        if (dir.includes('ladder')) {
-            dir = 'up';
-            // if ladder is not going up then it's going down
-            if (this.map[pos[0]][pos[1]]) {
-                dir = 'down';
-            } else {
-                dir = 'up';
-            }
-        }
-        if (dir === 'north' || dir === 'up') {
-            epos = [pos[0] - 1, pos[1]];
-        } else if (dir === 'south' || dir === 'down') {
-            epos = [pos[0] + 1, pos[1]];
-        } else if (dir === 'east') {
-            epos = [pos[0], pos[1] + 1];
-        } else {
-            epos = [pos[0], pos[1] - 1];
-        }
-        this.insertRoom(to, epos, pos, dir);
-    }
-
-    insertRoom(id, pos, frompos, dir) {
-        if (this.hasRoom(id)) {
-            return;
-        }
-        // console.log('Placing Room ' + id + ' to ' + dir + ' on ' + pos);
-        // console.log(structuredClone(this.map));
-        if (!this.map[pos[0]]) {
-            if (pos[0] === -1) {
-                pos[0] = 0;
-            }
-            this.map.splice(pos[0], 0, new Array(this.width()).fill(null));
-        }
-        if (this.map[pos[0]][pos[1]] === null) {
-            this.map[pos[0]][pos[1]] = id;
-        } else {
-            if (this.map[pos[0]][pos[1]] !== undefined && this.posWithin(pos) && frompos) {
-                // clockwise try positions
-                let tpos = [
-                    [-1,-1], [-1,0], [-1,+1],
-                    [0,+1],
-                    [+1,+1], [+1,0], [+1,-1],
-                    [0,+1]
-                ];
-                // positional vector according to frompos
-                let pv = [pos[0]-frompos[0], pos[1]-frompos[1]];
-                let pvi = tpos.findIndex(p => p[0] === pv[0] && p[1] === pv[1]);
-                let cpos = undefined;
-                for (let i = pvi; i < tpos.length; i++) {
-                    console.log(i);
-                    let ppos = [frompos[0]+tpos[i][0], frompos[1]+tpos[i][1]];
-                    if (this.posWithin(ppos) && this.map[ppos[0]][ppos[1]] === null) {
-                        cpos = ppos;
-                        break;
-                    }
-                }
-                if (!cpos && pvi !== 0) {
-                    for (let i = 0; i < pvi; i++) {
-                        let ppos = [frompos[0]+tpos[i][0], frompos[1]+tpos[i][1]];
-                        if (this.posWithin(ppos) && this.map[ppos[0]][ppos[1]] === null) {
-                            cpos = ppos;
-                            break;
-                        }
-                    }
-                }
-                if (cpos) {
-                    this.map[cpos[0]][cpos[1]] = id;
-                } else {
-                    let ipv = [-pv[0], -pv[1]];
-                    this.map.splice(pos[0] + ipv[0], 0, new Array(this.width()).fill(null));
-                    this.insertRoom(id, [pos[0] + ipv[0], pos[1] + ipv[1]], [frompos[0] + ipv[0], frompos[1] + ipv[1]], dir)
-                }
-                // console.log('Populated ' + dir + ' ' + id + ' ' + pos[0] + ',' + pos[1] + ' from ' + frompos[0] + ',' + frompos[1] + ' on ' + this.map[pos[0]][pos[1]]);
-                // this.print();
-            } else {
-                if (pos[1] === -1) {
-                    pos[1] = 0;
-                }
-                this.map[pos[0]].splice(pos[1], 0, id);
-                this.map.forEach((l,y) => {
-                    if (y !== pos[0]) {
-                        l.splice(pos[1], 0, null);
-                    }
-                });
-            }
-        }
-        this.placed.add(id);
-        // console.log('Placed Room ' + id + ' to ' + dir + ' on ' + pos);
         // this.print();
     }
 }
 
+
 class Section {
-    constructor(id, rooms) {
+    constructor(id, rooms, hint) {
         this.id = id;
         this.rooms = rooms;
         this.adjExits = new Map();
@@ -359,6 +427,7 @@ class Section {
         this.nodeX = 150;
         this.nodeY = 75;
         this.hidden = false;
+        this.hint = hint;
     }
 
     setHidden(hidden) {
@@ -395,37 +464,46 @@ class Section {
     }
 
     sectionMap() {
-        // console.log(this.rooms);
+        console.log(this.rooms);
         const allRoomIds = new Set(this.rooms.map(r => r.id));
         const extraExitsRoomIds = new Set(this.rooms.flatMap(r => r.extraExits.map(e => e.target)).filter(id => allRoomIds.has(id)));
-        this.map = new Grid(this.id);
+        this.map = new SectionGrid(this.id, this.hint);
         const insertExit = (r,e) => {
-            if (allRoomIds.has(e.target) && !this.map.hasRoom(e.target)) {
+            if (allRoomIds.has(e.target) && !this.map.hasNode(e.target)) {
                 const pos = this.map.findPos(r.id);
-                this.map.insertRoomByDirection(r.id, e.target, pos, e.name);
+                this.map.insertRoom(r.id, e.target, pos, e.name);
+            }
+        }
+        const insertRoom = r => {
+            let pos = this.map.findPos(r.id) || [0, 0];
+            const rexitIds = new Set(r.allExitIds())
+            const possibleEntrance = this.rooms.filter(r => this.map.hasNode(r.id)).find(r => rexitIds.has(r.id))
+            if (possibleEntrance) {
+                pos = this.map.findPos(possibleEntrance.id)
+                this.map.insertRoom(possibleEntrance.id, r.id, pos, '*');
+            } else {
+                this.map.insertRoom(undefined, r.id, pos);
             }
         }
         // insert rooms and n,s,w,e exits
         // console.log('inserting rooms and exits');
         this.rooms.filter(r => !extraExitsRoomIds.has(r.id)).forEach(r => {
-            if (!this.map.hasRoom(r.id)) {
-                const pos = this.map.findPos(r.id) || [0, 0];
-                this.map.insertRoom(r.id, pos);
+            if (!this.map.hasNode(r.id)) {
+                insertRoom(r)
             }
             r.exits.forEach(e => insertExit(r, e));
         });
         // insert extra rooms exits
         // console.log('inserting extra exits');
         this.rooms.filter(r => extraExitsRoomIds.has(r.id)).forEach(r => {
-            if (!this.map.hasRoom(r.id)) {
-                const pos = this.map.findPos(r.id) || [0, 0];
-                this.map.insertRoom(r.id, pos);
+            if (!this.map.hasNode(r.id)) {
+                insertRoom(r)
             }
             r.exits.forEach(e => insertExit(r, e));
             r.extraExits.forEach(e => insertExit(r, e));
         });
         // console.log(this.adjExits);
-        // this.map.print();
+        this.map.print();
         const coordsMap = this.map.gridXY(this.nodeX,this.nodeY);
         this.rooms.forEach(r => {
             const xy = coordsMap.get(r.id);
@@ -472,7 +550,7 @@ class Rooms {
         this.hint = hint;
         this.sections = []
         this.initSections();
-        this.initSectionGrid();
+        // this.initSectionGrid();
     }
 
     initSectionGrid() {
@@ -518,7 +596,7 @@ class Rooms {
             }
             return section;
         }).filter(section => section !== null);
-        this.sections = this.sections.map((sec, ind) => new Section(ind, sec));
+        this.sections = this.sections.map((sec, ind) => new Section(ind, sec, this.hint));
         this.sections.forEach(sec => sec.initAdjSections(this.sections));
         this.sections.forEach(sec => sec.sectionMap());
         // console.log(this.sections);
@@ -720,7 +798,7 @@ export default class AreaMap extends React.Component {
         if (!this.state.name) {
             return;
         }
-        const sections = this.state.rooms.render();
+        const sections = this.state.rooms.sections[0].render();
         return (
             <div style={{display: 'flex', justifyContent: 'space-evenly', width: '100%'}}>
                 <Xwrapper>
