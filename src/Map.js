@@ -223,7 +223,7 @@ class SectionGrid extends GridBase {
                     dir = f.dir;
                 }
             });
-        console.log('Inserting room ' + from + ' -> ' + to + ' ' + pos + ' ' + dir)
+        // console.log('Inserting room ' + from + ' -> ' + to + ' ' + pos + ' ' + dir)
         let tpos
         if (dir) {
             if (this.isLadder(from, to, dir)) {
@@ -412,7 +412,7 @@ class MapGrid extends SectionGrid {
         }
         this.placed.add(id);
         // console.log(this.map);
-        // this.print();
+        this.print();
     }
 }
 
@@ -550,11 +550,11 @@ class Rooms {
         this.hint = hint;
         this.sections = []
         this.initSections();
-        // this.initSectionGrid();
+        this.initMapGrid();
     }
 
-    initSectionGrid() {
-        this.grid = new SectionGrid(this.sections);
+    initMapGrid() {
+        this.grid = new MapGrid(this.sections, this.hint);
         this.grid.placeSections();
     }
 
@@ -798,7 +798,7 @@ export default class AreaMap extends React.Component {
         if (!this.state.name) {
             return;
         }
-        const sections = this.state.rooms.sections[0].render();
+        const sections = this.state.rooms.render();
         return (
             <div style={{display: 'flex', justifyContent: 'space-evenly', width: '100%'}}>
                 <Xwrapper>
