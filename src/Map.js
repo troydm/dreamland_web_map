@@ -18,7 +18,7 @@ const DraggableBox = ({id, text, x, y}) => {
     );
 };
 
-const Arrow = (from, to, color, showTail, zIndex) => {
+const Arrow = (from, to, color, showTail, path, dashed, zIndex) => {
     return (
         <Xarrow key={from + "_" + to}
             start={from.toString()}
@@ -29,7 +29,8 @@ const Arrow = (from, to, color, showTail, zIndex) => {
             headSize={3}
             tailSize={3}
             zIndex={zIndex}
-            path="grid"/>
+            dashness={dashed ? {animation: Number(0)} : false}
+            path={path}/>
     );
 }
 
@@ -252,7 +253,6 @@ class GridBase {
         } else {
             return false
         }
-        return true
     }
 
     moveRooms(moveRooms) {
@@ -484,7 +484,8 @@ class MapGrid extends SectionGrid {
         let c = 0
         do {
             if (!this.placedSections.has(section.id)) {
-                section.adjExits.forEach((es, rid) => {
+                const csection = section
+                section.adjExits.forEach((es, rid) =>
                     es.forEach(e => {
                         const sid = e[0]
                         if (!this.placedSections.has(sid)) {
@@ -492,10 +493,9 @@ class MapGrid extends SectionGrid {
                         }
                         const ex = e[1]
                         const dir = this.fixDirection(ex.target, rid, ex.name)
-                        const sec = this.findSection(sid)
-                        this.placeSection(section, ex.target, rid, dir)
+                        this.placeSection(csection, ex.target, rid, dir)
                     })
-                })
+                )
                 if (!this.placedSections.has(section.id)) {
                     if (this.hint.placeSectionAt && this.hint.placeSectionAt[section.id]) {
                         const pos = this.hint.placeSectionAt[section.id]
@@ -518,15 +518,8 @@ class MapGrid extends SectionGrid {
                     this.placeSection(sec, rid, ex.target, dir)
                 })
             })
-            section = undefined;
-            this.sections.filter(sec => this.placedSections.has(sec.id))
-                .forEach(sec =>
-                    sec.adjExits.forEach(es => {
-                        if (es.find(e => !this.placedSections.has(e[0]))) {
-                            section = sec
-                        }
-                    })
-                )
+            section = this.sections.filter(sec => this.placedSections.has(sec.id))
+                .find(sec => sec.findAdjExit((rid, ex) => !this.placedSections.has(ex[0])))
             if (!section) {
                 section = this.sections.find(sec => !this.placedSections.has(sec.id))
             }
@@ -549,25 +542,26 @@ class MapGrid extends SectionGrid {
 
 class Section {
     constructor(id, rooms, hint) {
-        this.id = id;
-        this.rooms = rooms;
-        this.adjExits = new Map();
-        this.x = 0;
-        this.y = 0;
-        this.nodeX = 150;
-        this.nodeY = 75;
-        this.hidden = false;
-        this.hint = hint;
+        this.id = id
+        this.rooms = rooms
+        this.adjExits = new Map()
+        this.adjSections = new Set()
+        this.x = 0
+        this.y = 0
+        this.nodeX = 150
+        this.nodeY = 75
+        this.hidden = false
+        this.hint = hint
     }
 
     setHidden(hidden) {
-        this.hidden = hidden;
+        this.hidden = hidden
     }
 
     setXY(y,x) {
-        this.x = x;
-        this.y = y;
-        this.rooms.forEach(r => r.setXY(r.y + y, r.x + x));
+        this.x = x
+        this.y = y
+        this.rooms.forEach(r => r.setXY(r.y + y, r.x + x))
     }
 
     initAdjSections(allSections) {
@@ -580,9 +574,20 @@ class Section {
                 return null;
             }).filter(e => e !== null);
             if (adjExits.length > 0) {
+                adjExits.forEach(es => this.adjSections.add(es[0]))
                 this.adjExits.set(r.id, adjExits);
             }
         });
+    }
+
+    findAdjExit(pred) {
+        for (const [rid, exs] of this.adjExits) {
+            for (const ex of exs) {
+                if (pred(rid, ex)) {
+                    return [rid, ex]
+                }
+            }
+        }
     }
 
     findRoom(id) {
@@ -671,7 +676,7 @@ class Section {
         const hiddenRoomIds = new Set(this.rooms.filter(r => r.hidden).map(r => r.id))
         const rarrows = this.rooms.flatMap(r => arrows.get(r.id).filter(e => allRoomIds.includes(e[1]))
                                   .filter(a => !hiddenRoomIds.has(a[0]) && !hiddenRoomIds.has(a[1])).map(a =>
-            Arrow(a[0], a[1], "#6f42c1", a[2], 1)
+            Arrow(a[0], a[1], "#6f42c1", a[2], "grid", false, 1)
         ));
         return rooms.concat(rarrows);
     }
@@ -800,7 +805,7 @@ class Rooms {
         return this.sections.map(sec => sec.render()).reduce((r1, r2) => r1.concat(r2)).concat(
             this.getArrows()
             .filter(a => !allHiddenRoomIds.has(a[0]) && !allHiddenRoomIds.has(a[1]))
-            .map(a => Arrow(a[0], a[1], "#2cf4eb", a[2], 0))
+            .map(a => Arrow(a[0], a[1], "#2cf4eb", a[2], "smooth", false, 0))
         );
     }
 
