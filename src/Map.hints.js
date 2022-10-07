@@ -29,6 +29,13 @@ const hints = {
             {room: 40022, to: "uul"},
             {room: 40015, to: "r"}
         ]
+    },
+    "map/mirror.are.xml": {
+        moveSectionRoomsAfterPlacement: {
+            0: [
+                {room: 5394, to: "l"}
+            ]
+        }
     }
 };
 

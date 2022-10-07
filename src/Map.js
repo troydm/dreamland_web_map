@@ -237,13 +237,27 @@ class GridBase {
     move(fromPos, toPos) {
         const val = this.map[fromPos[0]][fromPos[1]]
         if (val !== null) {
-            while (this.map[toPos[0]] === undefined) {
+            let c = 0
+            while (!this.isWithinY(toPos)) {
                 this.insertHRow(toPos[0])
                 fromPos = this.findPos(val)
+                if (toPos[0] < 0) {
+                    toPos[0] += 1
+                }
+                if (c++ > 100) {
+                    break
+                }
             }
-            while (this.map[toPos[0]][toPos[1]] === undefined) {
+            c = 0
+            while (!this.isWithinX(toPos)) {
                 this.insertVRow(toPos[1])
                 fromPos = this.findPos(val)
+                if (toPos[1] < 0) {
+                    toPos[1] += 1
+                }
+                if (c++ > 100) {
+                    break
+                }
             }
             if (this.map[toPos[0]][toPos[1]] === null) {
                 this.map[fromPos[0]][fromPos[1]] = null
@@ -274,6 +288,12 @@ class GridBase {
                             pos = this.left(pos)
                         } else if (d === 'd' || d === 's') {
                             pos = this.down(pos)
+                        } else if (d === 'h') {
+                            this.insertHRow(pos[0]);
+                        } else if (d === 'v') {
+                            this.insertVRow(pos[1]);
+                        } else if (d === 'p') {
+                            this.print()
                         } else {
                             console.log('Error, unknown move room directive ' + d + ' encountered for room ' + rid + ' found')
                         }
@@ -366,7 +386,7 @@ class SectionGrid extends GridBase {
                 tpos = [this.up(pos), this.down(pos), this.left(pos), this.right(pos)]
             } else {
                 console.log('Error, unknown direction, couldnt place room: ' + from + ' -> ' + to + ' ' + dir)
-                return;
+                return false;
             }
         } else {
             tpos = [pos]
@@ -377,7 +397,8 @@ class SectionGrid extends GridBase {
             if (this.isWithin(ipos)) {
                 if (this.get(ipos) === null) {
                     this.set(ipos,to)
-                    return;
+                    this.moveSectionRoomsAfterPlacement(to)
+                    return true;
                 }
             } else {
                 // console.log(ipos);
@@ -409,10 +430,20 @@ class SectionGrid extends GridBase {
                     }
                     this.set(ipos,to)
                 }
-                return;
+                this.moveSectionRoomsAfterPlacement(to)
+                return true;
             }
         }
         console.log('Error, couldnt place room: ' + from + ' -> ' + to + ' ' + dir)
+        return false;
+    }
+
+    moveSectionRoomsAfterPlacement(rid) {
+        if (this.hint.moveSectionRoomsAfterPlacement && this.hint.moveSectionRoomsAfterPlacement[this.id]) {
+            const moveRooms = this.hint.moveSectionRoomsAfterPlacement[this.id].filter(mv => mv.room === rid);
+            // console.log('moving section rooms for section ' + this.id);
+            this.moveRooms(moveRooms)
+        }
     }
 
     moveSectionRooms() {
@@ -599,14 +630,14 @@ class Section {
     }
 
     sectionMap() {
-        console.log(this.rooms);
+        // console.log(this.rooms);
         const allRoomIds = new Set(this.rooms.map(r => r.id));
         const extraExitsRoomIds = new Set(this.rooms.flatMap(r => r.extraExits.map(e => e.target)).filter(id => allRoomIds.has(id)));
         this.map = new SectionGrid(this.id, this.hint);
         const insertExit = (r,e) => {
             if (allRoomIds.has(e.target) && !this.map.hasNode(e.target)) {
                 const pos = this.map.findPos(r.id);
-                this.map.insertRoom(r.id, e.target, pos, e.name);
+                return this.map.insertRoom(r.id, e.target, pos, e.name);
             }
         }
         const insertRoom = r => {
@@ -615,16 +646,19 @@ class Section {
             const possibleEntrance = this.rooms.filter(r => this.map.hasNode(r.id)).find(r => rexitIds.has(r.id))
             if (possibleEntrance) {
                 pos = this.map.findPos(possibleEntrance.id)
-                this.map.insertRoom(possibleEntrance.id, r.id, pos, '*');
+                return this.map.insertRoom(possibleEntrance.id, r.id, pos, '*');
             } else {
-                this.map.insertRoom(undefined, r.id, pos);
+                return this.map.insertRoom(undefined, r.id, pos);
             }
         }
         // insert rooms and n,s,w,e exits
         // console.log('inserting rooms and exits');
         this.rooms.filter(r => !extraExitsRoomIds.has(r.id)).forEach(r => {
             if (!this.map.hasNode(r.id)) {
-                insertRoom(r)
+                if (!insertRoom(r)) {
+                    console.error('Couldn\'t place room ' + r.id)
+                    this.map.print()
+                }
             }
             r.exits.forEach(e => insertExit(r, e));
         });
@@ -690,7 +724,7 @@ class Rooms {
         this.nodeX = 150;
         this.nodeY = 75;
         this.spaceX = 20;
-        this.spaceY = 0;
+        this.spaceY = 20;
         this.initSections();
         this.initMapGrid();
     }
@@ -767,7 +801,7 @@ class Rooms {
     }
 
     roomExits(exits) {
-        return exits.map(exit => this.findRoom(exit.target));
+        return exits.map(exit => this.findRoom(exit.target)).filter(room => room)
     }
 
     getArrows() {
@@ -880,6 +914,7 @@ export default class AreaMap extends React.Component {
 
     componentDidMount() {
         this.fetchXml('map/galeon.are.xml');
+        // this.fetchXml('map/mirror.are.xml');
     }
 
     setActiveRoom(id) {
@@ -907,11 +942,15 @@ export default class AreaMap extends React.Component {
         }
     }
 
+    fixRoomName(name) {
+        return name.replaceAll("{r", "").replaceAll("{W","").replaceAll("{x", "")
+    }
+
     parseMap(resp) {
         if (this.state.name === resp.name) {
             return;
         }
-        const hint = hints[resp.name];
+        const hint = hints[resp.name] || {};
         const xmlOptions = {
             ignoreAttributes: false,
             attributeNamePrefix : "@_"
@@ -923,7 +962,7 @@ export default class AreaMap extends React.Component {
             if (hint.ignore && hint.ignore.includes(id)) {
                 return null;
             }
-            const r = new Room(id, room.name, room.sector);
+            const r = new Room(id, this.fixRoomName(room.name), room.sector);
             if (room.exits && room.exits.node) {
                 const exits = this.parseExits(room.exits.node);
                 const upOrDownExits = exits.filter(exit => isUpOrDown(exit.name));

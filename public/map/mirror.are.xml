@@ -1,0 +1,1738 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<area>
+  <areadata>
+    <authors>Kahn</authors>
+    <credits>Old Midgaard</credits>
+    <flags>hometown safe</flags>
+    <levelHigh>0</levelHigh>
+    <levelLow>0</levelLow>
+    <name>Старый Мидгаард</name>
+    <resetMessage>Затхлый аромат смерти и гниения наполняет этот населенный нежитью город.</resetMessage>
+    <security>9</security>
+    <speedwalk>3w4n2e3n2w</speedwalk>
+    <translator>Ruffina</translator>
+    <vnumHigh>5420</vnumHigh>
+    <vnumLow>5379</vnumLow>
+  </areadata>
+  <helps>
+    <node id="1446" keyword="'OLD MIDGAARD' 'СТАРЫЙ МИДГААРД'" level="0">Этот городок был основан первыми людьми, пришедшими на просторы Тэры. После пары
+десятилетий мира город подвергся атаке нежити, спустившейся с темных гор на
+западе, где угнездилось Зло. Многие жители пали в неравной борьбе, и город
+захватили чудовища. Немногочисленные выжившие сбежали дальше на юго-восток, где
+и основали современный {hh1392Мидгаард{x.
+
+Старый Мидгаард служит уютным пристанищем для {hh143некромантов{x, {hh144вампиров{x и
+{hh138антипаладинов{x. В городе можно найти магазины на любой вкус, получить задания
+и полакомиться кровью. 
+
+%PAUSE%
+{yЗадания{x:
+  {Y*{x Водяной на Храмовой Площади выдаст задания всем желающим (команда &apos;задание попросить&apos;).
+  {Y*{x Ведьма из Ведьминской Лавки выдаст поручение во славу зла.
+    Ограничения: злая натура. Как часто: раз в сутки.
+</node>
+  </helps>
+  <mobiles>
+    <node name="5381">
+      <ac bash="-2" exotic="7" pierce="-2" slash="-2"/>
+      <act add="npc scavenger stay_area warrior"/>
+      <aff del="slow"/>
+      <alignment>-600</alignment>
+      <dam_type>none</dam_type>
+      <damage>2d6+3</damage>
+      <default_pos>stand</default_pos>
+      <description>Один из стражников города был обращен в зомби и теперь добросовестно служит
+своим новым хозяевам.
+</description>
+      <form add="mammal" del="nonadoptable undead"/>
+      <hit>3d9+233</hit>
+      <imm del="charm poison"/>
+      <level>15</level>
+      <long_descr>Зомбического вида стражник (guard) следит за порядком на улицах.
+</long_descr>
+      <mana>7d9+100</mana>
+      <material>0</material>
+      <off add="bash berserk disarm kick parry rescue assist_vnum"/>
+      <player_name>zombie guard зомби стражник</player_name>
+      <race>zombie</race>
+      <res del="cold"/>
+      <sex>male</sex>
+      <short_descr>стражник||а|у|а|ом|е-зомби</short_descr>
+      <size>medium</size>
+      <spec>spec_guard</spec>
+      <start_pos>stand</start_pos>
+      <wealth>25</wealth>
+    </node>
+    <node name="5382">
+      <ac bash="9" exotic="10" pierce="9" slash="9"/>
+      <act add="npc scavenger"/>
+      <dam_type>none</dam_type>
+      <damage>1d4+0</damage>
+      <default_pos>stand</default_pos>
+      <description>Такие как он выживают при любом начальстве. Захват города нечистью
+никак не отразился на его карьере.
+</description>
+      <hit>2d6+10</hit>
+      <level>1</level>
+      <long_descr>Дворник (janitor) ходит вокруг, убирая.
+</long_descr>
+      <mana>0d9+100</mana>
+      <material>0</material>
+      <off add="disarm dodge trip assist_vnum"/>
+      <player_name>janitor дворник</player_name>
+      <race>human</race>
+      <sex>male</sex>
+      <short_descr>дворни|к|ка|ку|ка|ком|ке</short_descr>
+      <size>medium</size>
+      <spec>spec_janitor</spec>
+      <start_pos>stand</start_pos>
+      <wealth>1</wealth>
+    </node>
+    <node name="5383">
+      <ac bash="10" exotic="10" pierce="10" slash="10"/>
+      <act add="npc aggressive wimpy"/>
+      <alignment>-200</alignment>
+      <dam_type>none</dam_type>
+      <damage>1d2+0</damage>
+      <default_pos>stand</default_pos>
+      <description>Отталкивающая, неопрятная зверюга, с кусками какой-то гнили, застрявшей у 
+нее в зубах. 
+</description>
+      <hit>2d4+2</hit>
+      <long_descr>Паршивая собака (fido) норовит прокусить твой доспех.
+</long_descr>
+      <mana>0d1+99</mana>
+      <material>0</material>
+      <off add="disarm trip"/>
+      <player_name>fido dog собака фидо</player_name>
+      <race>fido</race>
+      <sex>female</sex>
+      <short_descr>паршив|ая|ой|ой|ую|ой|ой собак|а|и|е|у|ой|е</short_descr>
+      <size>medium</size>
+      <spec>spec_fido</spec>
+      <start_pos>stand</start_pos>
+    </node>
+    <node name="5384">
+      <ac bash="-2" exotic="7" pierce="-2" slash="-2"/>
+      <act add="npc sentinel stay_area warrior"/>
+      <aff del="slow"/>
+      <alignment>-600</alignment>
+      <dam_type>none</dam_type>
+      <damage>2d6+3</damage>
+      <default_pos>stand</default_pos>
+      <description>Один из стражников города был обращен в зомби и теперь добросовестно служит
+своим новым хозяевам.
+</description>
+      <form add="mammal" del="nonadoptable undead"/>
+      <hit>3d9+233</hit>
+      <imm del="charm poison"/>
+      <level>15</level>
+      <long_descr>Зомбического вида стражник (guard) охраняет ворота.
+</long_descr>
+      <mana>7d9+100</mana>
+      <material>0</material>
+      <off add="bash berserk disarm kick parry rescue assist_vnum"/>
+      <player_name>zombie guard зомби стражник</player_name>
+      <race>zombie</race>
+      <res del="cold"/>
+      <sex>male</sex>
+      <short_descr>стражник||а|у|а|ом|е-зомби</short_descr>
+      <size>medium</size>
+      <spec>spec_guard</spec>
+      <start_pos>stand</start_pos>
+      <wealth>25</wealth>
+    </node>
+    <node name="5385">
+      <ac bash="-35" exotic="-15" pierce="-35" slash="-35"/>
+      <act add="npc sentinel nopurge notrack"/>
+      <behavior type="ShopTrader">
+        <buys>scroll wand staff potion gem spellbook tattoo</buys>
+        <closeHour>23</closeHour>
+        <openHour>0</openHour>
+        <profitBuy>105</profitBuy>
+        <profitSell>15</profitSell>
+      </behavior>
+      <dam_type>magic</dam_type>
+      <damage>4d8+32</damage>
+      <default_pos>stand</default_pos>
+      <description>Прекрасная женщина с гладкой кожей и выразительным декольте. Подняв глаза
+чуть повыше, замечаешь интересное ожерелье, обхватывающее ее шею. Интересно,
+что будет, когда она его снимет?
+</description>
+      <detection add="invis"/>
+      <hit>25d10+3800</hit>
+      <hitroll>5</hitroll>
+      <imm add="summon charm spell"/>
+      <level>43</level>
+      <long_descr>Женщина (lady) с красными волосами пристально смотрит на тебя.
+</long_descr>
+      <mana>1d1+1999</mana>
+      <material>0</material>
+      <off add="area_attack dodge"/>
+      <player_name>witch red lady ведьма женщина</player_name>
+      <race>human</race>
+      <res add="weapon"/>
+      <sex>female</sex>
+      <short_descr>красн|ая|ой|ой|ую|ой|ой ведьм|а|ы|е|у|ой|е</short_descr>
+      <size>medium</size>
+      <start_pos>stand</start_pos>
+      <wealth>15000</wealth>
+    </node>
+    <node name="5386">
+      <ac bash="-55" exotic="-35" pierce="-55" slash="-55"/>
+      <act add="npc sentinel nopurge notrack"/>
+      <aff del="infrared sneak"/>
+      <alignment>-500</alignment>
+      <behavior type="ShopTrader">
+        <buys>gem</buys>
+        <closeHour>23</closeHour>
+        <openHour>0</openHour>
+        <profitBuy>110</profitBuy>
+        <profitSell>100</profitSell>
+      </behavior>
+      <dam_type>beating</dam_type>
+      <damage>3d8+25</damage>
+      <default_pos>stand</default_pos>
+      <description>Упитанный темный эльф ловко орудует за прилавком, выкрикивая поручения своим
+подмастерьям куда-то вглубь помещения.
+</description>
+      <hit>20d10+18800</hit>
+      <hitroll>10</hitroll>
+      <imm add="summon charm"/>
+      <level>60</level>
+      <long_descr>Булочник (baker) оценивающе оглядывает тебя.
+</long_descr>
+      <mana>1d1+999</mana>
+      <material>0</material>
+      <off add="bash berserk dodge"/>
+      <player_name>baker булочник</player_name>
+      <race>dark-elf</race>
+      <res add="spell weapon" del="charm"/>
+      <sex>male</sex>
+      <short_descr>булочни|к|ка|ку|ка|ком|ке</short_descr>
+      <size>medium</size>
+      <start_pos>stand</start_pos>
+      <vuln del="iron"/>
+      <wealth>500</wealth>
+    </node>
+    <node name="5387">
+      <ac bash="-55" exotic="-15" pierce="-55" slash="-55"/>
+      <act add="npc sentinel nopurge notrack"/>
+      <aff del="infrared"/>
+      <alignment>-400</alignment>
+      <behavior type="ShopTrader">
+        <buys>light treasure trash container food jewelry</buys>
+        <closeHour>23</closeHour>
+        <openHour>0</openHour>
+        <profitBuy>150</profitBuy>
+        <profitSell>40</profitSell>
+      </behavior>
+      <dam_type>beating</dam_type>
+      <damage>6d5+20</damage>
+      <default_pos>stand</default_pos>
+      <description>Этот гоблин - один из тех ловкачей-проходимцев, что перебрался в город сразу
+после войны. Кто знает, откуда он добывает свои товары на продажу. Наверняка
+не обошлось и без мародерства.
+</description>
+      <hit>25d10+18000</hit>
+      <hitroll>10</hitroll>
+      <imm add="summon charm"/>
+      <level>55</level>
+      <long_descr>Гоблин-бакалейщик (goblin) нетерпеливо поглядывает на тебя.
+</long_descr>
+      <mana>1d1+999</mana>
+      <material>0</material>
+      <off add="disarm dodge kick_dirt"/>
+      <player_name>goblin grocer гоблин бакалейщик</player_name>
+      <race>goblin</race>
+      <res add="spell weapon" del="disease"/>
+      <sex>male</sex>
+      <short_descr>гоблин||а|у|а|ом|е-бакалейщик||а|у|а|ом|е</short_descr>
+      <size>medium</size>
+      <start_pos>stand</start_pos>
+      <vuln del="spell"/>
+      <wealth>1300</wealth>
+    </node>
+    <node name="5388">
+      <ac bash="-50" exotic="-25" pierce="-50" slash="-50"/>
+      <act add="npc sentinel warrior nopurge notrack"/>
+      <alignment>-500</alignment>
+      <behavior type="ShopTrader">
+        <buys>weapon gem</buys>
+        <closeHour>23</closeHour>
+        <openHour>0</openHour>
+        <profitBuy>120</profitBuy>
+        <profitSell>40</profitSell>
+        <repairs>light scroll wand staff weapon lockpick keyring treasure armor potion clothing furniture trash container drink key food money boat npc_corpse pc_corpse fountain pill map portal warp_stone gem jewelry spellbook tattoo parchment</repairs>
+      </behavior>
+      <dam_type>punch</dam_type>
+      <damage>6d8+20</damage>
+      <default_pos>stand</default_pos>
+      <description>Коренастый темный дварф, он перебрался сюда из Подземья и с пользой применяет
+свой врожденный талант к обращению с оружием. Он же и починит тебе любую
+вещь за плату. 
+</description>
+      <hit>25d10+25000</hit>
+      <hitroll>15</hitroll>
+      <imm add="summon charm"/>
+      <level>86</level>
+      <long_descr>Дуэргар-оружейник (weaponsmith) зыркает на тебя из-за прилавка.
+</long_descr>
+      <mana>1d1+999</mana>
+      <material>0</material>
+      <off add="bash disarm kick parry"/>
+      <player_name>duergar weaponsmith дуэргар оружейник</player_name>
+      <race>human</race>
+      <res add="spell weapon"/>
+      <sex>male</sex>
+      <short_descr>дуэргар||а|у|а|ом|е-оружейник||а|у|а|ом|е</short_descr>
+      <size>medium</size>
+      <start_pos>stand</start_pos>
+      <wealth>25000</wealth>
+    </node>
+    <node name="5389">
+      <ac bash="-55" exotic="-15" pierce="-55" slash="-55"/>
+      <act add="npc sentinel nopurge notrack"/>
+      <behavior type="ShopTrader">
+        <buys>armor gem</buys>
+        <closeHour>23</closeHour>
+        <openHour>0</openHour>
+        <profitBuy>100</profitBuy>
+        <profitSell>50</profitSell>
+        <repairs>light scroll wand staff weapon lockpick keyring treasure armor potion clothing furniture trash container drink key food money boat npc_corpse pc_corpse fountain pill map portal warp_stone gem jewelry spellbook tattoo parchment</repairs>
+      </behavior>
+      <dam_type>punch</dam_type>
+      <damage>7d5+20</damage>
+      <default_pos>stand</default_pos>
+      <description>Пожилой свирф с тремя седыми волосами на лысой голове. Он одинаково ловко 
+управляется и с портняжной иглой, и с кузнечным мехом, и с кинжалом.
+</description>
+      <hit>25d10+23300</hit>
+      <hitroll>10</hitroll>
+      <imm add="summon charm"/>
+      <level>65</level>
+      <long_descr>Свирф (armourer) сидит за столом и зашивает чей-то жилет.
+</long_descr>
+      <mana>1d1+999</mana>
+      <material>0</material>
+      <off add="bash disarm dodge kick_dirt parry trip"/>
+      <player_name>svirfnebli armourer armorer свирфнебли доспешник </player_name>
+      <race>human</race>
+      <res add="spell weapon"/>
+      <sex>male</sex>
+      <short_descr>доспешник||а|у|а|ом|е</short_descr>
+      <size>medium</size>
+      <start_pos>stand</start_pos>
+      <wealth>25000</wealth>
+    </node>
+    <node name="5390">
+      <ac bash="-55" exotic="-50" pierce="-55" slash="-55"/>
+      <act add="npc sentinel nopurge notrack"/>
+      <aff add="haste"/>
+      <alignment>-1000</alignment>
+      <behavior type="ShopTrader">
+        <buys>light treasure warp_stone gem jewelry</buys>
+        <closeHour>23</closeHour>
+        <openHour>0</openHour>
+        <profitBuy>110</profitBuy>
+        <profitSell>100</profitSell>
+      </behavior>
+      <dam_type>slap</dam_type>
+      <damage>5d15+25</damage>
+      <default_pos>stand</default_pos>
+      <description>Ювелир весьма упитан (тебе не хочется думать, чем именно он набивает себе
+брюхо), с довольным, хотя и слегка настороженным, выражением лица.
+</description>
+      <form add="mammal" del="nonadoptable undead"/>
+      <hit>25d10+28500</hit>
+      <hitroll>10</hitroll>
+      <imm add="summon charm" del="disease"/>
+      <level>90</level>
+      <long_descr>Толстый гуль (jeweller) в стопицотый раз протирает до блеска витрину.
+</long_descr>
+      <mana>1d1+999</mana>
+      <material>0</material>
+      <off add="area_attack dodge"/>
+      <player_name>jeweller ювелир</player_name>
+      <race>ghoul</race>
+      <res add="spell weapon" del="charm"/>
+      <sex>male</sex>
+      <short_descr>ювелир||а|у|а|ом|е</short_descr>
+      <size>huge</size>
+      <start_pos>stand</start_pos>
+      <wealth>58000</wealth>
+    </node>
+    <node name="5391">
+      <ac bash="-50" exotic="-50" pierce="-50" slash="-50"/>
+      <act add="npc sentinel warrior nopurge notrack"/>
+      <aff add="infrared haste"/>
+      <behavior type="DefaultQuestMaster">
+      </behavior>
+      <dam_type>crush</dam_type>
+      <damage>5d14+40</damage>
+      <default_pos>stand</default_pos>
+      <description>Этот водяной космат, с зелеными волосами, одет в какое-то  тряпье. Большую
+часть времени он проводит под водой, изредка  выныривая с  тяжелым вздохом,
+когда кто-то из героев тревожит его своими  глупостями. Задание  им, видите
+ли, подавай.
+
+Ты тоже можешь попытать удачу командой {y{lRквест попросить{lEquest request{x.
+Еще полезно прочесть справку по темам &apos;{hhквестор{x&apos; и &apos;{hhвиды заданий{x&apos;.
+</description>
+      <detection add="evil invis hidden dark_vision"/>
+      <form add="edible sentient biped mammal" del="nonadoptable"/>
+      <group>3000</group>
+      <hit>1d1+27999</hit>
+      <hitroll>30</hitroll>
+      <imm add="summon charm mental"/>
+      <level>85</level>
+      <long_descr>Водяной (questor) выглядывает из фонтана.
+</long_descr>
+      <mana>1d1+1499</mana>
+      <material>0</material>
+      <off add="area_attack bash berserk disarm dodge fast kick parry rescue trip crush assist_guard"/>
+      <parts add="head arms legs heart brains guts hands feet fingers ear eye"/>
+      <player_name>questor квестор водяной vodyanoy</player_name>
+      <race>unique</race>
+      <res add="spell weapon fire cold"/>
+      <sex>male</sex>
+      <short_descr>водян|ой|ого|ому|ого|ым|ом</short_descr>
+      <size>huge</size>
+      <start_pos>stand</start_pos>
+      <vuln add="lightning mental"/>
+    </node>
+    <node name="5392">
+      <ac bash="-478" exotic="-379" pierce="-478" slash="-476"/>
+      <act add="npc sentinel cleric nopurge notrack"/>
+      <aff add="sanctuary"/>
+      <behavior type="Healer">
+        <services>
+          <node type="SpellHealService">
+            <descr>излечить раны</descr>
+            <name>wounds</name>
+            <rname>раны</rname>
+            <price type="CustomHealPrice">
+            </price>
+            <spell>master healing</spell>
+          </node>
+          <node type="SpellHealService">
+            <descr>вылечить слепоту</descr>
+            <name>blind</name>
+            <rname>слепоту</rname>
+            <price type="CoinPrice">
+              <gold>20</gold>
+            </price>
+            <spell>cure blindness</spell>
+          </node>
+          <node type="SpellHealService">
+            <descr>вылечить чуму</descr>
+            <name>disease</name>
+            <rname>чуму</rname>
+            <price type="CoinPrice">
+              <gold>15</gold>
+            </price>
+            <spell>cure disease</spell>
+          </node>
+          <node type="SpellHealService">
+            <descr>вылечить отравление</descr>
+            <name>poison</name>
+            <rname>яд</rname>
+            <price type="CoinPrice">
+              <gold>25</gold>
+            </price>
+            <spell>cure poison</spell>
+          </node>
+          <node type="SpellHealService">
+            <descr>снять проклятие</descr>
+            <name>uncurse</name>
+            <rname>проклятие</rname>
+            <price type="CoinPrice">
+              <gold>50</gold>
+            </price>
+            <spell>remove curse</spell>
+          </node>
+          <node type="SpellHealService">
+            <descr>снять усталость</descr>
+            <rname>усталость</rname>
+            <name>refresh</name>
+            <price type="CoinPrice">
+              <gold>5</gold>
+            </price>
+            <spell>refresh</spell>
+          </node>
+          <node type="ManaHealService">
+            <descr>восстановить ману</descr>
+            <name>mana</name>
+            <rname>ману</rname>
+            <price type="CustomHealPrice">
+            </price>
+            <words>candamira</words>
+          </node>
+          <node type="SpellHealService">
+            <descr>благословить</descr>
+            <rname>благо</rname>
+            <name>bless</name>
+            <price type="CustomHealPrice">
+            </price>
+            <spell>bless</spell>
+          </node>
+        </services>
+      </behavior>
+      <dam_type>divine</dam_type>
+      <damage>20d23+135</damage>
+      <default_pos>stand</default_pos>
+      <description>Бродячий монах нашел свое призвание в избавлении героев от недугов и от излишков
+денег. 
+Набери {y{hc{lRлечить{lEheal{x, чтобы увидеть список и стоимость его услуг.
+</description>
+      <detection add="invis hidden"/>
+      <hit>25d11+26942</hit>
+      <hitroll>73</hitroll>
+      <imm add="summon charm spell"/>
+      <level>120</level>
+      <long_descr>Лекарь (healer) излечит твои недуги за скромную плату.
+</long_descr>
+      <mana>10d10+4450</mana>
+      <material>0</material>
+      <off add="dodge fast kick parry"/>
+      <player_name>healer</player_name>
+      <race>human</race>
+      <res add="weapon"/>
+      <sex>male</sex>
+      <short_descr>лекар|ь|я|ю|я|ем|е</short_descr>
+      <size>huge</size>
+      <spec>spec_cast_adept</spec>
+      <start_pos>stand</start_pos>
+      <wealth>5000</wealth>
+    </node>
+    <node name="5393">
+      <ac bash="-65" exotic="-35" pierce="-65" slash="-65"/>
+      <act add="npc sentinel practice mage nopurge notrack"/>
+      <alignment>1000</alignment>
+      <dam_type>magic</dam_type>
+      <damage>3d8+24</damage>
+      <default_pos>stand</default_pos>
+      <description>Прежде чем ты успеваешь в ужасе воскликнуть &apos;{gЭльфийка?! Добрая?! Мастер
+моей гильдии?!!!{x&apos;, она опережает тебя и объясняет &apos;{gВолонтерская программа.
+Отлично будет смотреться в моем резюме через 500 лет.{x&apos;. 
+</description>
+      <detection add="invis magic hidden dark_vision"/>
+      <hit>1d1+29099</hit>
+      <imm add="summon charm weapon"/>
+      <level>96</level>
+      <long_descr>Глава твоей гильдии (guildmaster) стоит здесь.
+</long_descr>
+      <mana>1d1+999</mana>
+      <material>0</material>
+      <off add="dodge fade"/>
+      <player_name>guildmaster гильдмастер мастер гильдии</player_name>
+      <practicer registry="skillGroup">attack detection nature necromancy creation adventure</practicer>
+      <race>elf</race>
+      <res add="spell"/>
+      <sex>female</sex>
+      <short_descr>гильдмастер||а|у|а|ом|е</short_descr>
+      <size>medium</size>
+      <start_pos>stand</start_pos>
+    </node>
+    <node name="5394">
+      <ac bash="-65" exotic="-35" pierce="-65" slash="-65"/>
+      <act add="npc sentinel necromancer practice mage nopurge notrack"/>
+      <alignment>-1000</alignment>
+      <behavior type="VampireGuildmaster">
+      </behavior>
+      <dam_type>divine</dam_type>
+      <damage>3d8+24</damage>
+      <default_pos>stand</default_pos>
+      <description>Статный, немолодой вампир придирчиво изучает тебя. Он обучит тебя всем 
+премудростям вампирского мастерства.
+</description>
+      <detection add="evil invis magic hidden dark_vision"/>
+      <hit>1d1+29099</hit>
+      <imm add="summon charm weapon"/>
+      <level>96</level>
+      <long_descr>Глава твоей гильдии (guildmaster) стоит здесь.
+</long_descr>
+      <mana>1d1+999</mana>
+      <material>0</material>
+      <off add="disarm dodge fast kick parry"/>
+      <player_name>guildmaster гильдмастер мастер гильдии</player_name>
+      <practicer registry="skillGroup">attack vampiric detection nature necromancy creation adventure</practicer>
+      <race>human</race>
+      <res add="spell"/>
+      <sex>male</sex>
+      <short_descr>гильдмастер||а|у|а|ом|е</short_descr>
+      <size>medium</size>
+      <start_pos>stand</start_pos>
+    </node>
+    <node name="5395">
+      <ac bash="-65" exotic="-15" pierce="-65" slash="-65"/>
+      <act add="npc sentinel cleric nopurge notrack"/>
+      <aff add="sanctuary" del="infrared sneak"/>
+      <alignment>-700</alignment>
+      <dam_type>divine</dam_type>
+      <damage>2d4+30</damage>
+      <default_pos>stand</default_pos>
+      <description>Эта бледная эльфийка с тонкими чертами лица и кругами под глазами, очевидно,
+измождена долгими сидениями над книгами и пренебрежением такими мирскими
+заботами, как еда и сон. Ты вряд ли узнаешь, какому именно богу она поклоняется.
+Благодаря своим обширным познаниям в теологии, она сможет приобщить тебя к любой
+из официальных религий, которые известны в Мире Мечты, но ей недоступны древние
+культы. 
+
+Чтобы увидеть список всех возможных религий, набери {W{hcсправка религия{hx{x.
+Чтобы узнать, какие религии доступны тебе, посмотри на Книгу Судеб ({W{hclook book{hx{x).
+Чтобы стать атеист{Smом{Sfкой{Sx, можно {W{hcсказать хочу стать атеистом{hx{x -- это можно сделать
+{RТОЛЬКО ОДИН РАЗ{x за все перерождения.
+
+А когда будешь готов{Sfа{Sx принять одну из официальных религий, просто назови вслух
+имя божества, которому ты будешь поклоняться всю свою жизнь.
+</description>
+      <detection add="invis hidden"/>
+      <hit>1d1+20999</hit>
+      <hitroll>10</hitroll>
+      <imm add="summon charm spell"/>
+      <level>80</level>
+      <long_descr>Темная эльфийка (dark-elf) поглощена изучением старинных фолиантов.
+</long_descr>
+      <mana>1d1+999</mana>
+      <material>0</material>
+      <off add="dodge fast kick parry"/>
+      <player_name>dark-elf эльфийка темная</player_name>
+      <race>dark-elf</race>
+      <religion registry="religion">dwarkin kind cradya mihail leo varda hauzer nofate fili allanon bastian irlana tirna turlok karmina tananda mephisto ruffina razer bast godiva taiphoen</religion>
+      <res add="weapon" del="charm"/>
+      <sex>female</sex>
+      <short_descr>темн|ая|ой|ой|ую|ой|ой эльфийк|а|и|е|у|ой|е</short_descr>
+      <size>huge</size>
+      <spec>spec_cast_adept</spec>
+      <start_pos>stand</start_pos>
+      <vuln del="iron"/>
+      <wealth>5000</wealth>
+    </node>
+    <node name="5396">
+      <ac bash="-65" exotic="-15" pierce="-65" slash="-65"/>
+      <act add="npc sentinel undead nopurge notrack"/>
+      <alignment>-1000</alignment>
+      <behavior type="MoneyChanger">
+      </behavior>
+      <dam_type>suction</dam_type>
+      <damage>2d4+30</damage>
+      <default_pos>stand</default_pos>
+      <description>Рядовой сотрудник компании, он стремится любой ценой пробиться на верх банковской иерархии.
+</description>
+      <detection add="invis hidden"/>
+      <hit>1d1+20999</hit>
+      <hitroll>10</hitroll>
+      <imm add="summon charm spell"/>
+      <level>80</level>
+      <long_descr>Клерк-вампир (vampire) в накрахмаленной рубашке приветливо скалит клыки.
+</long_descr>
+      <mana>1d1+999</mana>
+      <material>none</material>
+      <off add="dodge fast kick parry"/>
+      <player_name>vampire bank clerk клерк вампир клерк-вампир</player_name>
+      <race>human</race>
+      <res add="weapon"/>
+      <sex>male</sex>
+      <short_descr>клерк||а|у|а|ом|е-вампир||а|у|а|ом|е</short_descr>
+      <size>huge</size>
+      <start_pos>stand</start_pos>
+      <wealth>5000</wealth>
+    </node>
+    <node name="5397">
+      <ac bash="-65" exotic="-15" pierce="-65" slash="-65"/>
+      <act add="npc sentinel mage nopurge notrack"/>
+      <aff add="protect_good" del="infrared"/>
+      <alignment>-750</alignment>
+      <behavior type="ShopTrader">
+        <buys>gem</buys>
+        <closeHour>23</closeHour>
+        <openHour>0</openHour>
+        <profitBuy>110</profitBuy>
+        <profitSell>100</profitSell>
+      </behavior>
+      <dam_type>divine</dam_type>
+      <damage>2d4+30</damage>
+      <default_pos>stand</default_pos>
+      <description>Эта крепкая дуэргарская женщина, пожалуй, могла бы заломать медведя. Тем более
+для нее не проблема выкинуть из бара задохликов вроде тебя, если начнешь
+дебоширить. 
+</description>
+      <detection add="invis hidden"/>
+      <hit>1d1+20999</hit>
+      <hitroll>10</hitroll>
+      <imm add="summon charm spell weapon"/>
+      <level>80</level>
+      <long_descr>Широкоплечая дуэргарша (duergar) работает барменшей и вышибалой.
+</long_descr>
+      <mana>1d1+999</mana>
+      <material>none</material>
+      <off add="dodge fast kick parry"/>
+      <player_name>duergar witch дуэргарская ведьма</player_name>
+      <race>duergar</race>
+      <res add="weapon" del="disease"/>
+      <sex>female</sex>
+      <short_descr>дуэргарш|а|и|е|у|ей|е</short_descr>
+      <size>medium</size>
+      <start_pos>stand</start_pos>
+      <vuln del="drowning"/>
+      <wealth>5000</wealth>
+    </node>
+    <node name="5398">
+      <ac bash="-65" exotic="-35" pierce="-65" slash="-65"/>
+      <act add="npc sentinel practice mage warrior nopurge notrack"/>
+      <alignment>-1000</alignment>
+      <behavior type="AntipaladinGuildmaster">
+      </behavior>
+      <dam_type>divine</dam_type>
+      <damage>3d8+24</damage>
+      <default_pos>stand</default_pos>
+      <description>Мастер гильдии облачена в черный доспех, лицо ее прикрывает маска. Тебе
+кажется, что ее глазницы под маской невероятно глубокие, а сами глаза светятся
+неестественным зеленоватым светом. Ты не можешь достаточно долго удержать
+ее взгляд, чтобы сказать наверняка.
+Раз уж ты здесь, мастер обучит тебя премудростям мастерства анти-паладинов,
+если ты воспользуешься командой {y{hcпрактиковать здесь{x.
+</description>
+      <detection add="evil invis magic hidden dark_vision"/>
+      <hit>1d1+29099</hit>
+      <imm add="summon charm weapon negative"/>
+      <level>96</level>
+      <long_descr>Мастер (master) гильдии анти-паладинов упражняется с призрачным клинком.
+</long_descr>
+      <mana>1d1+999</mana>
+      <material>0</material>
+      <off add="disarm dodge fast kick parry"/>
+      <player_name>guildmaster master гилдьмастер мастер гильдии</player_name>
+      <practicer registry="skillGroup">maladictions attack detection nature creation adventure</practicer>
+      <race>human</race>
+      <res add="spell"/>
+      <sex>female</sex>
+      <short_descr>гильдмастер||а|у|а|ом|е</short_descr>
+      <size>medium</size>
+      <start_pos>stand</start_pos>
+    </node>
+  </mobiles>
+  <objects>
+    <node name="5383">
+      <cost>1</cost>
+      <description>Свернутая в рулон карта (map) лежит здесь.</description>
+      <extraDescr>
+        <node keyword="map old">.
+                           Старый Мидгаард 
+*****************************************************************************
+    N              Templeman&apos;s room
+    |                     |
+W - + - E            Temple altar                                    
+    |                     |                        
+    S              Temple of Midgaard                GraveYard
+                          |                              |
+    Necromancer  Wizard   |     Bakery  Weaponsmith      |            
+       Guild       |    Market    |         |          Cross    
+         |---------+--- Square ---+---------+--------- Roads -- Forest
+         |         |              |         |            |
+      Vampire  Jeweller        General   Armourer     Village
+     Guildroom                 Store                  guarded
+                                                        by
+                                                   Imperial Guards
+                                                  
+*****************************************************************************
+</node>
+      </extraDescr>
+      <gender>m</gender>
+      <material>paper</material>
+      <name>map old midgaard карта старый мидгард</name>
+      <short_descr>карт|а|ы|е|у|ой|е Старого Мидгаарда</short_descr>
+      <type name="map">
+        <v0>1</v0>
+      </type>
+      <wear_flags>take</wear_flags>
+      <weight>10</weight>
+    </node>
+    <node name="5384">
+      <description>Заросший тиной и ряской фонтан (fountain) распространяет нехороший запах.</description>
+      <extraDescr>
+        <node keyword="fountain old фонтан старый">Фонтан  сложен  из  старых  обшарпаных  камней.  В  его   центре  когда-то
+возвышалась скульптура,  однако сейчас  остался только  одинокий постамент.
+Вода  в  фонтане  так плотно  покрыта ряской,  что не  видно дна.  Но пить,
+кажется, все еще можно.
+</node>
+      </extraDescr>
+      <gender>m</gender>
+      <material>stone</material>
+      <name>fountain old старый фонтан</name>
+      <short_descr>стар|ый|ого|ому|ый|ым|ом фонтан||а|у||ом|е</short_descr>
+      <type name="fountain">
+        <liquid>water</liquid>
+      </type>
+      <weight>10000</weight>
+    </node>
+    <node name="5385">
+      <cost>75</cost>
+      <description>Бочонок (barrel) лежит на земле.</description>
+      <gender>m</gender>
+      <material>wood</material>
+      <name>barrel blood бочонок крови</name>
+      <short_descr>бочон|ок|ка|ку|ок|ком|ке с кровью</short_descr>
+      <type name="drink">
+        <left>300</left>
+        <liquid>blood</liquid>
+        <total>300</total>
+      </type>
+      <wear_flags>take</wear_flags>
+      <weight>160</weight>
+    </node>
+    <node name="5386">
+      <cost>10</cost>
+      <description>Свернутый в рулон, пожелтевший от времени свиток (scroll) брошен тут.</description>
+      <extraDescr>
+        <node keyword="scroll parchment свиток пергамента">В самом центре свитка видна выцветшая от времени надпись, выполненная
+каллиграфическим почерком:
+
+        {rLo ao mozu bisa iedri, ao morghulis.{x
+        
+Тебя пробирает дрожь от одного звучания этих древних слов в твоей голове.
+</node>
+      </extraDescr>
+      <extra_flags>glow dark nopurge</extra_flags>
+      <gender>m</gender>
+      <material>parchment</material>
+      <name>scroll parchment свиток пергамента</name>
+      <short_descr>стар|ый|ого|ому|ый|ым|ом свит|ок|ка|ку|ок|ком|ке пергамента</short_descr>
+      <type name="parchment">
+      </type>
+      <wear_flags>take</wear_flags>
+      <weight>1</weight>
+    </node>
+  </objects>
+  <rooms>
+    <node name="5379">
+      <description>Ты стоишь в развалинах того, что когда-то было центральным храмом и местом
+поклонения  жителей Старого Мидгаарда. Стены покрыты слоями паутины, а 
+{Tdсолнечный{Tnлунный{x свет с трудом проникает сюда сквозь пыльные цветные
+витражи. По углам ютятся летучие мыши. К северу расположено капище, устроенное
+на месте алтаря. Гранитные ступени ведут обратно на юг, к Площади.
+</description>
+      <exits>
+        <node name="north">
+          <target>5386</target>
+        </node>
+        <node name="south">
+          <target>5380</target>
+        </node>
+      </exits>
+      <flags>no_mob indoors</flags>
+      <name>Развалины Храма Всех Богов</name>
+      <sector>inside</sector>
+    </node>
+    <node name="5380">
+      <description>Ты стоишь на оживленной площади, примыкающей к развалинам храма  на севере.
+Повсюду  снует  деятельная  нечисть, торопящаяся  по своим  нечистым делам.
+Фонтан  в  центре  служит  местом  встреч, где  можно собраться  и обсудить
+последние новости. Вокруг не видно никого, кто напоминал бы прошлых жителей
+этого  города:  они  все давно  съедены или  обращены в  рабство. Гранитные
+ступени ведут к храму на север, Рыночная площадь  на юге,  а на  востоке ты
+видишь деревянное здание с боровом на вывеске.
+</description>
+      <exits>
+        <node name="east">
+          <key>0</key>
+          <target>5406</target>
+        </node>
+        <node name="north">
+          <target>5379</target>
+        </node>
+        <node name="south">
+          <target>5381</target>
+        </node>
+      </exits>
+      <name>Храмовая площадь</name>
+      <resets>
+        <mob limit="2" maxHere="2" vnum="5382"/>
+        <drop vnum="5384"/>
+        <mob limit="1" maxHere="1" vnum="5391"/>
+      </resets>
+      <sector>city</sector>
+    </node>
+    <node name="5381">
+      <description>Ты стоишь на Рыночной Площади, расположенной в самом центре  города. Вокруг
+тебя тянутся ряды палаток и киосков, уже изрядно выцветших  на солнце  и по
+большей части пустых. Торговцы из  Талоса и  окружающих деревень  больше не
+решаются ездить  сюда, как  раньше. Но  на прилегающих  улицах к  востоку и
+западу можно наверняка найти несколько магазинов. На севере  видна Храмовая
+площадь.
+</description>
+      <exits>
+        <node name="east">
+          <target>5382</target>
+        </node>
+        <node name="north">
+          <target>5380</target>
+        </node>
+        <node name="south">
+          <key>0</key>
+          <target>5409</target>
+        </node>
+        <node name="west">
+          <target>5398</target>
+        </node>
+      </exits>
+      <name>Рыночная площадь</name>
+      <resets>
+        <mob limit="1" maxHere="1" vnum="5381"/>
+        <equip to="light" vnum="3365"/>
+        <equip to="finger_l" vnum="3364"/>
+        <equip to="sheath" vnum="3350"/>
+        <equip to="body" vnum="3353"/>
+        <equip to="neck_2" vnum="3355"/>
+        <drop vnum="3726"/>
+      </resets>
+      <sector>city</sector>
+    </node>
+    <node name="5382">
+      <description>Ты идешь по Главной Улице города, которая тянется с востока на  запад. Дома
+по обе стороны улицы выглядят  заброшенными: жители  в панике  покинули их,
+если,  конечно,  успели.  Однако  несколько  магазинов  с  новыми хозяевами
+чувствуют  себя неплохо:  к северу  от тебя  дверь в  продуктовый, а  к югу
+расположились хозтовары.
+</description>
+      <exits>
+        <node name="east">
+          <target>5383</target>
+        </node>
+        <node name="north">
+          <target>5387</target>
+        </node>
+        <node name="south">
+          <target>5388</target>
+        </node>
+        <node name="west">
+          <target>5381</target>
+        </node>
+      </exits>
+      <name>Главная Улица</name>
+      <resets>
+        <mob limit="3" maxHere="3" vnum="5383"/>
+      </resets>
+      <sector>city</sector>
+    </node>
+    <node name="5383">
+      <description>Ты идешь по Главной Улице города, которая тянется с востока на  запад. Дома
+по обе стороны улицы выглядят  заброшенными: жители  в панике  покинули их,
+если,  конечно,  успели.  Однако  несколько  магазинов  с  новыми хозяевами
+чувствуют  себя неплохо:  к северу  от тебя  дверь в оружейный магазин, а
+к югу - магазин доспехов. К востоку видны ворота города.
+</description>
+      <exits>
+        <node name="east">
+          <target>5384</target>
+        </node>
+        <node name="north">
+          <target>5389</target>
+        </node>
+        <node name="south">
+          <target>5390</target>
+        </node>
+        <node name="west">
+          <target>5382</target>
+        </node>
+      </exits>
+      <name>Главная Улица</name>
+      <sector>city</sector>
+    </node>
+    <node name="5384">
+      <description>Когда-то здесь высились две сторожевые башни, соединенные мостом, а под ними
+были тяжелые дубовые ворота. Сейчас стражники-зомби охраняют все, что осталось
+от этого сооружения.
+</description>
+      <exits>
+        <node name="east">
+          <description>You see the city gate.
+</description>
+          <flags>isdoor</flags>
+          <key>3133</key>
+          <keyword>gate ворота</keyword>
+          <short_descr>ворот|а||ам|а|ами|ах</short_descr>
+          <target>5385</target>
+        </node>
+        <node name="west">
+          <description>You see Main Street.</description>
+          <target>5383</target>
+        </node>
+      </exits>
+      <name>Внутри восточных ворот</name>
+      <resets>
+        <mob limit="1" maxHere="1" vnum="5384"/>
+        <equip to="light" vnum="3365"/>
+        <equip to="finger_l" vnum="3364"/>
+        <equip to="sheath" vnum="3350"/>
+        <equip to="body" vnum="3353"/>
+        <equip to="shield" vnum="3354"/>
+      </resets>
+      <sector>city</sector>
+    </node>
+    <node name="5385">
+      <description>Когда-то здесь высились две сторожевые башни, соединенные мостом, а под ними
+были тяжелые дубовые ворота. Сейчас же остались одни развалины. Створки
+обветшалых ворот шатаются от ветра, однако сквозь них видна какая-то охрана.
+К востоку простирается дорога, ведущая на Равнины Севера.
+</description>
+      <exits>
+        <node name="east">
+          <target>5401</target>
+        </node>
+        <node name="west">
+          <flags>isdoor</flags>
+          <key>3133</key>
+          <keyword>gate ворота</keyword>
+          <short_descr>ворот|а||ам|а|ами|ах</short_descr>
+          <target>5384</target>
+        </node>
+      </exits>
+      <name>За восточными воротами</name>
+      <sector>city</sector>
+    </node>
+    <node name="5386">
+      <description>Нечисть, захватив город, разрушила центральный храм  и организовала  на его
+месте нечистое капище. Огромный  алтарь из  цельного куска  черного мрамора
+возвышается по середине помещения. Он отполирован до блеска, так  что пятен
+крови  от  жертвоприношений  совсем  не  видно. К  северу вход  в помещение
+библиотеки, к югу можно вернуться ко входу в храм.
+</description>
+      <exits>
+        <node name="north">
+          <target>5397</target>
+        </node>
+        <node name="south">
+          <target>5379</target>
+        </node>
+      </exits>
+      <flags>no_mob indoors law</flags>
+      <healRate>200</healRate>
+      <manaRate>200</manaRate>
+      <name>Нечистое капище</name>
+      <resets>
+        <mob limit="1" maxHere="1" vnum="5392"/>
+        <drop vnum="3010"/>
+        <drop vnum="3398"/>
+      </resets>
+      <sector>inside</sector>
+    </node>
+    <node name="5387">
+      <description>Помещение булочной отделано со  своеобразным изяществом.  Стекляные витрины
+заполнены  выпечкой,  рядом  стоят  резные  металлические  столы  и стулья,
+приглашающие сесть и отведать купленное прямо  здесь. Очевидно,  что хозяин
+ориентируется на местных  гурманов, которые  хотят большего  разнообразия в
+своей  диете,  чем  кровь   и  чьи-то   мозги.  Небольшая   вывеска  (sign)
+рассказывает, как вести себя в магазине.
+</description>
+      <exits>
+        <node name="south">
+          <target>5382</target>
+        </node>
+      </exits>
+      <extraDescr>
+        <node keyword="sign вывеска">Правила поведения в магазине:
+
+   купить            номер
+   купить название   приобрести что-то из списка
+   список            булочник покажет ассортимент и цены
+   свойства номер    булочник расскажет подробности
+</node>
+      </extraDescr>
+      <flags>law</flags>
+      <name>Булочная</name>
+      <resets>
+        <mob limit="1" maxHere="1" vnum="5386"/>
+        <give vnum="3009"/>
+        <give vnum="3011"/>
+        <give vnum="3012"/>
+        <give vnum="50031"/>
+        <give vnum="3013"/>
+        <give vnum="3014"/>
+        <equip to="wield" vnum="3022"/>
+      </resets>
+      <sector>inside</sector>
+    </node>
+    <node name="5388">
+      <description>Открыв  свежепокрашенную  дверь  и  звякнув  колокольчиком, ты  попадаешь в
+помещение хозтоваров.  Новый хозяин  очень гордится  своим бизнесом  и даже
+перекрасил вывеску, намалевав белые буквы {WThe Warehouse{x  на {Rкроваво-красном{x
+фоне. Все  товары аккуратно  разложены по  полкам, вне  твоей досягаемости.
+Табличка (note) рассказывает о том, как пользоваться магазином.
+</description>
+      <exits>
+        <node name="north">
+          <target>5382</target>
+        </node>
+      </exits>
+      <extraDescr>
+        <node keyword="note табличка">Правила поведения в магазине:
+
+   купить номер
+   купить название   приобрести что-то из списка
+   список            показать ассортимент и цены
+   свойства номер    узнать подробности о вещи
+   цена вещь         узнать у продавца, за сколько он купит у тебя эту вещь 
+   продать вещь      продать что-то из твоего инвентаря
+</node>
+      </extraDescr>
+      <flags>indoors</flags>
+      <name>Хозтовары</name>
+      <resets>
+        <mob limit="1" maxHere="1" vnum="5387"/>
+        <give vnum="3030"/>
+        <give vnum="3031"/>
+        <give vnum="3138"/>
+        <give vnum="3032"/>
+        <give vnum="3033"/>
+        <equip to="wield" vnum="3022"/>
+        <give vnum="3015"/>
+        <give vnum="3016"/>
+        <give vnum="5303"/>
+      </resets>
+      <sector>inside</sector>
+    </node>
+    <node name="5389">
+      <description>Вполне обычный оружейный магазин продолжает свою торговлю при новых хозяевах.
+Стойки с оружием тянутся вдоль стен и содержат все возможные виды оружия,
+от кинжала до посоха. Табличка (note) рассказывает, что делать в магазине.
+</description>
+      <exits>
+        <node name="south">
+          <target>5383</target>
+        </node>
+      </exits>
+      <extraDescr>
+        <node keyword="note табличка">Правила поведения в магазине:
+
+   купить номер
+   купить название    приобрести что-то из списка
+   список             показать ассортимент и цены
+   свойства номер     узнать подробности о вещи
+   цена вещь          узнать у продавца, за сколько он купит у тебя эту вещь 
+   продать вещь       продать что-то из твоего инвентаря
+   чинить вещь        починить поврежденную вещь за деньги
+   стоимость вещь     выяснить стоимость починки
+</node>
+      </extraDescr>
+      <flags>indoors</flags>
+      <name>Магазин оружия</name>
+      <resets>
+        <mob limit="1" maxHere="1" vnum="5388"/>
+        <give vnum="3020"/>
+        <give vnum="3021"/>
+        <give vnum="3022"/>
+        <give vnum="3023"/>
+        <give vnum="3024"/>
+        <give vnum="3025"/>
+        <give vnum="3026"/>
+        <give vnum="3027"/>
+        <give vnum="3028"/>
+        <give vnum="3029"/>
+        <equip to="sheath" vnum="3022"/>
+      </resets>
+      <sector>inside</sector>
+    </node>
+    <node name="5390">
+      <description>Этим магазином явно заведует кто-то с легкой формой обсессивно-компульсивного
+расстройства, настолько тщательно все разложено по местам, пронумеровано
+и помечено этикетками. Вокруг идеальная чистота. Записка (note) на прилавке
+напоминает, как пользоваться магазином.
+</description>
+      <exits>
+        <node name="north">
+          <target>5383</target>
+        </node>
+      </exits>
+      <extraDescr>
+        <node keyword="note табличка">Правила поведения в магазине:
+
+   купить номер
+   купить название    приобрести что-то из списка
+   список             показать ассортимент и цены
+   свойства номер     узнать подробности о вещи
+   цена вещь          узнать у продавца, за сколько он купит у тебя эту вещь 
+   продать вещь       продать что-то из твоего инвентаря
+   чинить вещь        починить поврежденную вещь за деньги
+   стоимость вещь     выяснить стоимость починки
+</node>
+      </extraDescr>
+      <flags>indoors</flags>
+      <name>Магазин доспехов</name>
+      <resets>
+        <mob limit="1" maxHere="1" vnum="5389"/>
+        <give vnum="3072"/>
+        <give vnum="3073"/>
+        <give vnum="3074"/>
+        <give vnum="3075"/>
+        <give vnum="3076"/>
+        <give vnum="3077"/>
+        <give vnum="3110"/>
+        <give vnum="3111"/>
+        <give vnum="3112"/>
+        <give vnum="3113"/>
+        <give vnum="3114"/>
+        <give vnum="3115"/>
+        <give vnum="3116"/>
+        <give vnum="3097"/>
+        <give vnum="3117"/>
+        <equip to="wield" vnum="3022"/>
+      </resets>
+      <sector>inside</sector>
+    </node>
+    <node name="5391">
+      <description>Помещение лавки довольно тесное и насквозь пропитано запахом редких химикатов
+и специй. Огромный стол делит лавку на две части, а на стене позади стола
+тянутся стеллажи, забитые банками, бутылками, книгами и свитками всех сортов
+и размеров. Под ногами, разумеется, мельтешит хозяйкин кот. 
+</description>
+      <exits>
+        <node name="south">
+          <target>5398</target>
+        </node>
+      </exits>
+      <flags>indoors</flags>
+      <name>Ведьминская лавка</name>
+      <properties>
+        <node name="smell">Резкий запах специй и неизвестных веществ ударяет в нос.</node>
+      </properties>
+      <resets>
+        <mob limit="1" maxHere="1" vnum="5385"/>
+        <give vnum="3040"/>
+        <give vnum="3041"/>
+        <give vnum="3039"/>
+        <give vnum="3042"/>
+        <give vnum="3043"/>
+        <give vnum="3044"/>
+      </resets>
+      <sector>inside</sector>
+    </node>
+    <node name="5392">
+      <description>Войдя через изящную дверь, ты попадаешь в небольшую, со вкусом обставленную
+комнату. Прямо по середине стоит полированный стол (desk) из красного дерева,
+от поверхности которого отражается мягкий свет масляных светильников (lamps),
+развешанных по стенам. На столе, в стекляных коробках, разложены драгоценные 
+камни и другие ювелирные изделия. Рядом с ними стоит небольшая табличка (sign),
+написанная изящными золотыми буквами.
+</description>
+      <exits>
+        <node name="north">
+          <target>5398</target>
+        </node>
+      </exits>
+      <extraDescr>
+        <node keyword="oil lamps светильники">Светильники изготовлены из золота и надежно прикручены к каменным стенам.
+</node>
+        <node keyword="desk стол">Твоя физиономия отражается в его отполированной поверхности.
+</node>
+        <node keyword="sign табличка">Правила поведения в магазине:
+
+   купить номер
+   купить название    приобрести что-то из списка
+   список             показать ассортимент и цены
+   свойства номер     узнать подробности о вещи
+   цена вещь          узнать у продавца, за сколько он купит у тебя эту вещь 
+   продать вещь       продать что-то из твоего инвентаря
+   чинить вещь        починить поврежденную вещь за деньги
+   стоимость вещь     выяснить стоимость починки
+</node>
+      </extraDescr>
+      <flags>indoors</flags>
+      <name>Ювелирная лавка</name>
+      <resets>
+        <mob limit="1" maxHere="1" vnum="5390"/>
+        <give vnum="3378"/>
+        <give vnum="3377"/>
+        <give vnum="3376"/>
+        <give vnum="3375"/>
+        <give vnum="3374"/>
+        <give vnum="3373"/>
+      </resets>
+      <sector>inside</sector>
+    </node>
+    <node name="5393">
+      <description>Бар представляет из себя аскетически обставленное помещение с неприятным запахом.
+Из-за двери лаборатории на востоке льется слабый свет, и, похоже, все запахи
+проникают именно оттуда. С непривычки аппетит может и пропасть, что весьма
+кстати, так как бармен куда-то испарился.
+</description>
+      <exits>
+        <node name="east">
+          <target>5394</target>
+        </node>
+        <node name="south">
+          <target>5399</target>
+        </node>
+      </exits>
+      <flags>no_mob indoors law nosummon</flags>
+      <guilds>necromancer</guilds>
+      <name>Бар &quot;Утечка Энергии&quot;</name>
+      <sector>inside</sector>
+    </node>
+    <node name="5394">
+      <description>Ты   входишь   в   экспериментальную   лабораторию   гильдии   некромантов.
+Многочисленные  дубовые  столы завалены  сосудами странного  вида. Каменные
+стены  над  столами  покрыты  черной  копотью.  На  полу  видно полустертую
+пентаграмму и еще более загадочные  письмена. С  грифельной доски  в темном
+углу  небрежно  стерли написанное,  так что  все еще  проступают болезненно
+выглядящие буквы. В центре комнаты расположен  колодец, ведущий  в темноту.
+Из глубины его в комнату проникают миазмы.
+</description>
+      <exits>
+        <node name="north">
+          <key>0</key>
+          <target>5413</target>
+        </node>
+        <node name="west">
+          <target>5393</target>
+        </node>
+      </exits>
+      <flags>no_vanish no_mob indoors law nosummon</flags>
+      <guilds>necromancer</guilds>
+      <name>Лаборатория некромантов</name>
+      <resets>
+        <mob limit="1" maxHere="1" vnum="5393"/>
+      </resets>
+      <sector>inside</sector>
+    </node>
+    <node name="5395">
+      <description>В этом баре всегда кипит  жизнь, но  кипит она,  в основном,  в специальных
+клетках, где сидит тот или  иной несчастный,  дожидаясь своей  очереди быть
+выпитым  или  съеденным. Нежить  всех мастей  и рангов  расслабляется здесь
+после тяжелой охоты. Дверь в лабораторию видна к западу, выход - на севере.
+</description>
+      <exits>
+        <node name="north">
+          <target>5399</target>
+        </node>
+        <node name="west">
+          <target>5396</target>
+        </node>
+      </exits>
+      <flags>no_vanish no_mob indoors law nosummon</flags>
+      <guilds>vampire</guilds>
+      <name>Бар &quot;Упыри и вурдалаки&quot;</name>
+      <sector>inside</sector>
+    </node>
+    <node name="5396">
+      <description>Ты   входишь   в   экспериментальную   лабораторию   гильдии   вампиров.
+Многочисленные  дубовые  столы завалены  сосудами странного  вида. Каменные
+стены  над  столами  покрыты  черной  копотью.  На  полу  видно полустертую
+пентаграмму и еще более загадочные  письмена. С  грифельной доски  в темном
+углу  небрежно  стерли написанное,  так что  все еще  проступают болезненно
+выглядящие буквы. В центре комнаты расположен  колодец, ведущий  в темноту.
+Из глубины его в комнату проникают миазмы.
+</description>
+      <exits>
+        <node name="east">
+          <target>5395</target>
+        </node>
+      </exits>
+      <flags>dark no_vanish no_mob indoors law nosummon</flags>
+      <guilds>vampire</guilds>
+      <name>Лаборатория Вампиров</name>
+      <resets>
+        <mob limit="1" maxHere="1" vnum="5394"/>
+      </resets>
+      <sector>inside</sector>
+    </node>
+    <node name="5397">
+      <description>В северной части капища расположена библиотека, полная книг, свитков пергамента
+и даже каменных табличек. Кто-то собрал здесь неплохую коллекцию священных
+текстов различных религий. Произнеси вслух {Cрелигия{x, чтобы узнать больше.
+</description>
+      <exits>
+        <node name="south">
+          <target>5386</target>
+        </node>
+      </exits>
+      <flags>indoors law</flags>
+      <manaRate>150</manaRate>
+      <name>Библиотека</name>
+      <resets>
+        <mob limit="1" maxHere="1" vnum="5395"/>
+        <drop vnum="28620"/>
+      </resets>
+      <sector>inside</sector>
+    </node>
+    <node name="5398">
+      <description>Ты идешь по Главной Улице города, которая тянется с востока на  запад. Дома
+по обе стороны улицы выглядят  заброшенными: жители  в панике  покинули их,
+если,  конечно,  успели.  Однако  несколько  магазинов  с  новыми хозяевами
+чувствуют себя неплохо: к северу от тебя дверь в ведьминскую лавку, а к югу
+ювелир. Улица продолжается дальше на запад,  а приглушенная  суета рыночной
+площади доносится сюда с востока.
+</description>
+      <exits>
+        <node name="east">
+          <target>5381</target>
+        </node>
+        <node name="north">
+          <target>5391</target>
+        </node>
+        <node name="south">
+          <target>5392</target>
+        </node>
+        <node name="west">
+          <target>5399</target>
+        </node>
+      </exits>
+      <flags>indoors law</flags>
+      <name>Главная Улица</name>
+      <sector>inside</sector>
+    </node>
+    <node name="5399">
+      <description>Ты идешь по Главной Улице города, которая тянется с востока на  запад. Дома
+в этой части города лежат в развалинах: похоже,  западная часть  приняла на
+себя основной удар. Два нетронутых здания выделяются из  общего запустения.
+Судя по вывескам, это места сборища вампиров (к югу) и  некромантов (здание
+на севере). Разрушенные ворота видны к западу отсюда, улица продолжается на
+восток.
+</description>
+      <exits>
+        <node name="east">
+          <target>5398</target>
+        </node>
+        <node name="north">
+          <target>5393</target>
+        </node>
+        <node name="south">
+          <target>5395</target>
+        </node>
+        <node name="west">
+          <target>32262</target>
+        </node>
+      </exits>
+      <flags>indoors law</flags>
+      <name>Главная улица у Западных Ворот</name>
+      <sector>inside</sector>
+    </node>
+    <node name="5400">
+      <description>Огромная  ангарная  комната, уходящая  в бесконечность,  со штабелями
+ячеек-хранилищ. В  каждой можно  увидеть грустного  голема, ожидающего
+своего хозяина.
+</description>
+      <exits>
+        <node name="east">
+          <key>0</key>
+          <target>5405</target>
+        </node>
+        <node name="south">
+          <key>0</key>
+          <target>5413</target>
+        </node>
+        <node name="west">
+          <key>0</key>
+          <target>5402</target>
+        </node>
+      </exits>
+      <guilds>necromancer</guilds>
+      <name>Фабрика Големов</name>
+      <sector>inside</sector>
+    </node>
+    <node name="5401">
+      <description>Ты стоишь на окраине Старого Мидгаарда. Этот городок был основан первыми людьми,
+пришедшими на просторы Тэры. После пары десятилетий мира город подвергся атаке
+нежити, спустившейся с темных гор на западе, где угнездилось Зло. Многие жители
+пали в неравной борьбе, и город захватили чудовища. Немногочисленные выжившие
+сбежали дальше на юго-восток, где и основали современный Мидгаард.
+Дорога ведет обратно на восток к равнинам, а на западе видны ворота города.
+</description>
+      <exits>
+        <node name="east">
+          <key>0</key>
+          <target>316</target>
+        </node>
+        <node name="north">
+          <target>34100</target>
+        </node>
+        <node name="west">
+          <target>5385</target>
+        </node>
+      </exits>
+      <flags>no_mob</flags>
+      <name>Вход в город</name>
+      <sector>city</sector>
+    </node>
+    <node name="5402">
+      <description>Огромная  ангарная  комната, уходящая  в бесконечность,  со штабелями
+ячеек-хранилищ. В  каждой можно  увидеть грустного  голема, ожидающего
+своего хозяина.
+</description>
+      <exits>
+        <node name="east">
+          <key>0</key>
+          <target>5400</target>
+        </node>
+        <node name="south">
+          <key>0</key>
+          <target>5403</target>
+        </node>
+      </exits>
+      <guilds>necromancer</guilds>
+      <name>Фабрика Големов</name>
+      <sector>inside</sector>
+    </node>
+    <node name="5403">
+      <description>Огромная  ангарная  комната, уходящая  в бесконечность,  со штабелями
+ячеек-хранилищ. В  каждой можно  увидеть грустного  голема, ожидающего
+своего хозяина.
+</description>
+      <exits>
+        <node name="east">
+          <key>0</key>
+          <target>5413</target>
+        </node>
+        <node name="north">
+          <key>0</key>
+          <target>5402</target>
+        </node>
+      </exits>
+      <guilds>necromancer</guilds>
+      <name>Фабрика Големов</name>
+      <sector>inside</sector>
+    </node>
+    <node name="5404">
+      <description>Огромная  ангарная  комната, уходящая  в бесконечность,  со штабелями
+ячеек-хранилищ. В  каждой можно  увидеть грустного  голема, ожидающего
+своего хозяина.
+</description>
+      <exits>
+        <node name="north">
+          <key>0</key>
+          <target>5405</target>
+        </node>
+        <node name="west">
+          <key>0</key>
+          <target>5413</target>
+        </node>
+      </exits>
+      <flags>no_vanish indoors nosummon</flags>
+      <guilds>necromancer</guilds>
+      <name>Фабрика Големов</name>
+      <sector>inside</sector>
+    </node>
+    <node name="5405">
+      <description>Огромная  ангарная  комната, уходящая  в бесконечность,  со штабелями
+ячеек-хранилищ. В  каждой можно  увидеть грустного  голема, ожидающего
+своего хозяина.
+</description>
+      <exits>
+        <node name="south">
+          <key>0</key>
+          <target>5404</target>
+        </node>
+        <node name="west">
+          <key>0</key>
+          <target>5400</target>
+        </node>
+      </exits>
+      <flags>no_vanish indoors nosummon</flags>
+      <guilds>necromancer</guilds>
+      <name>Фабрика Големов</name>
+      <sector>inside</sector>
+    </node>
+    <node name="5406">
+      <description>Зал  гостиницы  уставлен   старинной  мебелью,   обтянутой  кроваво-красным
+бархатом.  Окон  нет,  поэтом  в  помещении  царит  не  раздражающий никого
+полумрак. На стойке, за которой обычно сидит портье, ты  замечаешь табличку
+&quot;no vacancy&quot;. Лестница на второй этаж ведет в помещение банка, дверь  в бар
+- на востоке.
+</description>
+      <exits>
+        <node name="east">
+          <key>0</key>
+          <target>5408</target>
+        </node>
+        <node name="up">
+          <key>0</key>
+          <target>5407</target>
+        </node>
+        <node name="west">
+          <key>0</key>
+          <target>5380</target>
+        </node>
+      </exits>
+      <flags>indoors law</flags>
+      <name>Гостиница &quot;Поющий Боров&quot;</name>
+      <sector>inside</sector>
+    </node>
+    <node name="5407">
+      <description>В небольшом помещении на втором этаже гостиницы расположен филиал банка
+&quot;Носферату и сыновья&quot;. Банк без предрассудков обслужит любого персонажа,
+сдирая одинаковую комиссию независимо от расы и класса.
+Небольшая вывеска (sign) приглашает тебя ознакомиться доступными операциями.
+</description>
+      <exits>
+        <node name="down">
+          <key>0</key>
+          <target>5406</target>
+        </node>
+      </exits>
+      <extraDescr>
+        <node keyword="sign вывеска">- дай вампиру-клерку им серебро, чтобы {hhобменять{x его на золото
+- напиши {hc{yнасчет{x или {hc{yсосчета{x для операций с {hh1086банковским счетом{x
+</node>
+      </extraDescr>
+      <flags>indoors law</flags>
+      <name>Банк {r&quot;{WНосферату и сыновья{r&quot;{x</name>
+      <resets>
+        <mob limit="1" maxHere="1" vnum="5396"/>
+        <drop vnum="100"/>
+      </resets>
+      <sector>inside</sector>
+    </node>
+    <node name="5408">
+      <description>Уютное помещение бара освещено только тусклым светом факелов. Расположившиеся
+за стойкой и столиками клиенты потягивают кровавые коктейли из высоких бокалов.
+Ты тоже можешь полакомиться местными деликатесами, для этого посмотри на 
+вывеску (sign).
+</description>
+      <exits>
+        <node name="west">
+          <key>0</key>
+          <target>5406</target>
+        </node>
+      </exits>
+      <extraDescr>
+        <node keyword="вывеска sign">Правила поведения в баре:
+			  
+      список             посмотреть ассортимент бара
+      купить название
+      купить номер       купить что-то в баре
+</node>
+      </extraDescr>
+      <flags>indoors law</flags>
+      <name>Бар &quot;Поющий Боров&quot;</name>
+      <resets>
+        <mob limit="1" maxHere="1" vnum="5397"/>
+        <give vnum="5385"/>
+        <give vnum="3000"/>
+      </resets>
+      <sector>inside</sector>
+    </node>
+    <node name="5409">
+      <description>Улица  с  оригинальным названием  Торговая соединяет  южную часть  города с
+Рыночной  площадью.  Вдоль  улицы  видны  здания  заброшенных  магазинов  с
+выбитыми окнами и сорванными с петель дверьми. Улица продолжается дальше на
+юг, а к северу можнов выйти на Рыночную площадь.
+</description>
+      <exits>
+        <node name="north">
+          <key>0</key>
+          <target>5381</target>
+        </node>
+        <node name="south">
+          <key>0</key>
+          <target>5410</target>
+        </node>
+      </exits>
+      <name>Торговая улица</name>
+      <sector>city</sector>
+    </node>
+    <node name="5410">
+      <description>Улица с оригинальным названием Торговая соединяет южную часть города с 
+Рыночной площадью. Вдоль улицы видны здания заброшенных магазинов с выбитыми
+окнами и сорванными с петель дверьми. Улица продолжается дальше на север,
+а на востоке ты замечаешь огромное черное здание довольно мрачного вида.
+</description>
+      <exits>
+        <node name="east">
+          <key>0</key>
+          <target>5411</target>
+        </node>
+        <node name="north">
+          <key>0</key>
+          <target>5409</target>
+        </node>
+      </exits>
+      <name>Торговая улица</name>
+      <sector>city</sector>
+    </node>
+    <node name="5411">
+      <description>Ты  попадаешь  в  темный  каменный  зал  без  окон.  Стены   зала  завешены
+гобеленами, изображающими батальные сцены. Это помещение  было сравнительно
+недавно, в 676м году, захвачено  гильдией анти-паладинов  и переоборудовано
+под их нужды. Тяжелая дверь на юге ведет во внутренний двор, выход из Храма
+- на западе.
+</description>
+      <exits>
+        <node name="south">
+          <key>0</key>
+          <target>5412</target>
+        </node>
+        <node name="west">
+          <key>0</key>
+          <target>5410</target>
+        </node>
+      </exits>
+      <flags>no_vanish indoors law nosummon</flags>
+      <guilds>anti-paladin</guilds>
+      <name>Дьявольский Храм</name>
+      <sector>inside</sector>
+    </node>
+    <node name="5412">
+      <description>Внутренний двор храма обнесен высокими каменными стенами.  Все пространство
+занимает  площадка  для  тренировок,  покрытая  хорошо  утоптанной  травой.
+Тяжелая кованая дверь на севере ведет обратно в храм. Колодец в  углу двора
+предлагает альтернативный выход вниз, в канализацию.
+
+Табличка (plaque) на двери привлекает твое внимание.
+</description>
+      <exits>
+        <node name="down">
+          <flags>isdoor closed</flags>
+          <key>0</key>
+          <keyword>door</keyword>
+          <short_descr>крышк|а|и|е|у|ой|е колодца</short_descr>
+          <target>7043</target>
+        </node>
+        <node name="north">
+          <key>0</key>
+          <target>5411</target>
+        </node>
+      </exits>
+      <extraDescr>
+        <node keyword="plaque табличка">Если хочешь совершить защитный ритуал над своим призрачным клинком, 
+просто дай клинок гильдмастеру.
+</node>
+      </extraDescr>
+      <flags>no_vanish law nosummon</flags>
+      <guilds>anti-paladin</guilds>
+      <name>Внутренний двор гильдии анти-паладинов</name>
+      <resets>
+        <mob limit="1" maxHere="1" vnum="5398"/>
+      </resets>
+      <sector>city</sector>
+    </node>
+    <node name="5413">
+      <description>Огромная  ангарная  комната, уходящая  в бесконечность,  со штабелями
+ячеек-хранилищ. В  каждой можно  увидеть грустного  голема, ожидающего
+своего хозяина.
+</description>
+      <exits>
+        <node name="east">
+          <key>0</key>
+          <target>5404</target>
+        </node>
+        <node name="north">
+          <key>0</key>
+          <target>5400</target>
+        </node>
+        <node name="south">
+          <key>0</key>
+          <target>5394</target>
+        </node>
+        <node name="west">
+          <key>0</key>
+          <target>5403</target>
+        </node>
+      </exits>
+      <flags>no_vanish indoors nosummon</flags>
+      <guilds>necromancer</guilds>
+      <name>Фабрика Големов </name>
+      <sector>inside</sector>
+    </node>
+  </rooms>
+</area>
