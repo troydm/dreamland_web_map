@@ -204,7 +204,6 @@ class GridBase {
                     p[1] = 0
                 }
             }
-            this.print()
         }
         if (this.map[p[0]][p[1]]) {
             this.placed.delete(this.map[p[0]][p[1]])
@@ -279,8 +278,14 @@ class GridBase {
                 if (Array.isArray(moveDirective) && moveDirective.length === 2) {
                     pos = moveDirective;
                 } else if (typeof moveDirective === 'string') {
+                    let savedPos = undefined;
                     [...moveDirective].forEach(d => {
-                        if (d === 'u' || d === 'n') {
+                        if (d === '[') {
+                            savedPos = pos
+                        } else if (d === ']') {
+                            pos = savedPos
+                            savedPos = undefined
+                        } else if (d === 'u' || d === 'n') {
                             pos = this.up(pos)
                         } else if (d === 'r' || d === 'e') {
                             pos = this.right(pos)
@@ -293,6 +298,10 @@ class GridBase {
                         } else if (d === 'v') {
                             this.insertVRow(pos[1]);
                         } else if (d === 'p') {
+                            console.log('Current position: [' + pos[0] + "," + pos[1] + ']')
+                            if (savedPos) {
+                                console.log('Saved position: [' + savedPos[0] + "," + savedPos[1] + ']')
+                            }
                             this.print()
                         } else {
                             console.log('Error, unknown move room directive ' + d + ' encountered for room ' + rid + ' found')
@@ -308,6 +317,58 @@ class GridBase {
                 console.log('Error, invalid move room directive, no position for room ' + rid + ' found')
             }
         })
+    }
+
+    compact() {
+        if (this.map.length === 0 || this.map[0].length === 0) {
+            return
+        }
+        let remove = true
+        for (let i = 0; i < this.map[0].length; i++) {
+            if (this.map[0][i] !== null) {
+                remove = false
+                break
+            }
+        }
+        if (remove) {
+            this.map.splice(0, 1)
+        }
+        remove = true
+        const h = this.map.length
+        for (let i = 0; i < this.map[h-1].length; i++) {
+            if (this.map[h-1][i] !== null) {
+                remove = false
+                break
+            }
+        }
+        if (remove) {
+            this.map.splice(h-1, 1)
+        }
+        remove = true
+        for (let i = 0; i < this.map.length; i++) {
+            if (this.map[i][0] !== null) {
+                remove = false
+                break
+            }
+        }
+        if (remove) {
+            for (let i = 0; i < this.map.length; i++) {
+                this.map[i].splice(0, 1)
+            }
+        }
+        const w = this.map[0].length
+        remove = true
+        for (let i = 0; i < this.map.length; i++) {
+            if (this.map[i][w-1] !== null) {
+                remove = false
+                break
+            }
+        }
+        if (remove) {
+            for (let i = 0; i < this.map.length; i++) {
+                this.map[i].splice(w-1, 1)
+            }
+        }
     }
 }
 
@@ -566,6 +627,9 @@ class MapGrid extends SectionGrid {
             console.error('Following sections weren\'t placed:')
             console.error(this.sections.filter(sec => !this.placedSections.has(sec.id)))
         }
+        console.log('Map grid')
+        this.compact()
+        this.print()
     }
 
 }
@@ -630,26 +694,32 @@ class Section {
     }
 
     sectionMap() {
-        // console.log(this.rooms);
+        console.log('Section: ' + this.id)
+        console.log(this.rooms);
         const allRoomIds = new Set(this.rooms.map(r => r.id));
         const extraExitsRoomIds = new Set(this.rooms.flatMap(r => r.extraExits.map(e => e.target)).filter(id => allRoomIds.has(id)));
         this.map = new SectionGrid(this.id, this.hint);
         const insertExit = (r,e) => {
+            // console.log('inserting exit from room ' + r.id + ' to ' + e.target)
             if (allRoomIds.has(e.target) && !this.map.hasNode(e.target)) {
                 const pos = this.map.findPos(r.id);
                 return this.map.insertRoom(r.id, e.target, pos, e.name);
             }
         }
         const insertRoom = r => {
+            // console.log('inserting room ' + r.id)
             let pos = this.map.findPos(r.id) || [0, 0];
             const rexitIds = new Set(r.allExitIds())
-            const possibleEntrance = this.rooms.filter(r => this.map.hasNode(r.id)).find(r => rexitIds.has(r.id))
+            const possibleEntrance = this.rooms.filter(r2 => this.map.hasNode(r2.id))
+                .find(r2 => rexitIds.has(r2.id) || r2.allExitIds().includes(r.id))
+            let result
             if (possibleEntrance) {
                 pos = this.map.findPos(possibleEntrance.id)
-                return this.map.insertRoom(possibleEntrance.id, r.id, pos, '*');
+                result = this.map.insertRoom(possibleEntrance.id, r.id, pos, '*');
             } else {
-                return this.map.insertRoom(undefined, r.id, pos);
+                result = this.map.insertRoom(undefined, r.id, pos);
             }
+            return result
         }
         // insert rooms and n,s,w,e exits
         // console.log('inserting rooms and exits');
@@ -673,10 +743,14 @@ class Section {
         });
         // console.log(this.adjExits);
         this.map.moveSectionRooms()
+        this.map.compact()
         this.map.print();
         const coordsMap = this.map.gridXY(this.nodeX,this.nodeY);
         this.rooms.forEach(r => {
             const xy = coordsMap.get(r.id);
+            if (!xy) {
+                console.log('Couldn\'t find ' + r.id + ' position')
+            }
             r.setXY(xy[0] + this.y, xy[1] + this.x);
         });
         this.width = this.nodeX * this.map.width();
@@ -913,8 +987,9 @@ export default class AreaMap extends React.Component {
     }
 
     componentDidMount() {
-        this.fetchXml('map/galeon.are.xml');
+        // this.fetchXml('map/galeon.are.xml');
         // this.fetchXml('map/mirror.are.xml');
+        this.fetchXml('map/drow.are.xml');
     }
 
     setActiveRoom(id) {
@@ -1004,6 +1079,7 @@ export default class AreaMap extends React.Component {
             return;
         }
         // this.state.rooms.sections[0].findRoom(40000).setHidden(true)
+        // const sections = this.state.rooms.sections[3].render();
         const sections = this.state.rooms.render();
         return (
             <div style={{display: 'flex', justifyContent: 'space-evenly', width: '100%'}}>

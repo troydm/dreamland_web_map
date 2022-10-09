@@ -12,7 +12,7 @@ const hints = {
         moveSectionRooms: {
             0: [
                 {room: 40005, to: "l"},
-                {room: 40026, to: "ll"} 
+                {room: 40026, to: "ll"}
             ]
         },
         centralSection: 0,
@@ -36,6 +36,16 @@ const hints = {
                 {room: 5394, to: "l"}
             ]
         }
+    },
+    "map/drow.are.xml": {
+        moveMapRooms: [
+            {room: 5133, to: "d"},
+            {room: 5132, to: "d"},
+            {room: 5131, to: "d"},
+            {room: 5136, to: "urrr"},
+            {room: 5126, to: "uulll"},
+            {room: 5140, to: "ruu"}
+        ]
     }
 };
 
